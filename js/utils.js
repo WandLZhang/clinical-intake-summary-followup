@@ -46,13 +46,42 @@ export function getTooltipContent(category, subcategory) {
             }
             return 'Blood sugar information not provided';
         case 'symptoms-medications':
-            return record.medications && record.medications.medication_list ? `Medications: ${record.medications.medication_list.join(', ')}` : 'No medications reported';
+            if (record.medications && record.medications.medication_list) {
+                const meds = record.medications.medication_list.map(med => 
+                    med.name + (med.dosage ? ` (${med.dosage})` : '')
+                ).join(', ');
+                return `Medications: ${meds}`;
+            }
+            return 'No medications reported';
         case 'symptoms-problems':
-            return record.medications && record.medications.problems ? `Medication issues: ${record.medications.problems.description}` : 'No medication issues reported';
+            if (record.medications) {
+                let issues = [];
+                if (record.medications.problems) {
+                    issues.push(`Issues: ${record.medications.problems}`);
+                }
+                if (record.medications.adherence) {
+                    issues.push(`Adherence: ${record.medications.adherence}`);
+                }
+                return issues.length > 0 ? `Medication issues: ${issues.join(', ')}` : 'No medication issues reported';
+            }
+            return 'No medication information available';
         case 'lifestyle-diet':
-            return record.diet ? `Overall health: ${record.diet.overall_health}, Fruits/Vegetables: ${record.diet.fruits_vegetables_frequency}` : 'Diet information not provided';
+            if (record.diet) {
+                let dietInfo = [];
+                if (record.diet.description) {
+                    dietInfo.push(`Description: ${record.diet.description}`);
+                }
+                if (record.diet.fruits_vegetables_frequency) {
+                    dietInfo.push(`Fruits/Vegetables: ${record.diet.fruits_vegetables_frequency}`);
+                }
+                return dietInfo.length > 0 ? dietInfo.join(', ') : 'Diet information not provided';
+            }
+            return 'Diet information not provided';
         case 'lifestyle-activity':
-            return record.activity ? `Exercise frequency: ${record.activity.exercise_frequency}` : 'Physical activity information not provided';
+            if (record.activity && record.activity.frequency) {
+                return `Exercise frequency: ${record.activity.frequency}`;
+            }
+            return 'Physical activity information not provided';
         case 'lifestyle-mental':
             content = record.mental && record.mental.symptoms ? Object.entries(record.mental.symptoms)
                 .filter(([key, value]) => value === true)
@@ -60,7 +89,11 @@ export function getTooltipContent(category, subcategory) {
                 .join(', ') : '';
             return content ? `Mental health symptoms: ${content}` : 'No mental health symptoms reported';
         case 'lifestyle-cognitive':
-            return record.cognitive && record.cognitive.description ? `Cognitive changes: ${record.cognitive.description}` : 'No cognitive changes reported';
+            if (record.cognitive) {
+                const cognitiveInfo = extractInfo(record.cognitive);
+                return cognitiveInfo.length > 0 ? cognitiveInfo.join(', ') : 'Cognitive information provided';
+            }
+            return 'Cognitive information not provided';
         case 'additional-conditions':
             return record.conditions && record.conditions.description ? `Other conditions: ${record.conditions.description}` : 'No additional conditions reported';
         case 'additional-healthcare':
@@ -70,6 +103,18 @@ export function getTooltipContent(category, subcategory) {
         default:
             return 'Information not available';
     }
+}
+
+function extractInfo(obj, prefix = '') {
+    let info = [];
+    for (const [key, value] of Object.entries(obj)) {
+        if (typeof value === 'object' && value !== null) {
+            info.push(...extractInfo(value, `${prefix}${key}: `));
+        } else if (value !== null && value !== undefined) {
+            info.push(`${prefix}${key}: ${value}`);
+        }
+    }
+    return info;
 }
 
 /**
