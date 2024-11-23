@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Diabetes Care Assistant</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="logo text-xl font-bold text-blue-600">Diabetes Care Assistant</div>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-6 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 flex-grow">
+        <!-- Left Sidebar - Progress Section -->
+        <section class="w-full lg:w-1/3 mb-6">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-lg font-semibold mb-4">Form Completion Progress</h2>
+                <div class="space-y-6">
+                    <!-- Symptoms Section -->
+                    <div class="section-container">
+                        <h3 class="text-sm font-medium mb-1">Symptoms & Management</h3>
+                        <div class="progress-bar">
+                            <div class="progress bg-blue-600" id="symptoms-progress"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="completion-box" id="symptoms-current-box" data-tooltip="">Symptoms</div>
+                            <div class="completion-box" id="symptoms-blood-sugar-box" data-tooltip="">Blood Sugar</div>
+                            <div class="completion-box" id="symptoms-medications-box" data-tooltip="">Medications</div>
+                            <div class="completion-box" id="symptoms-problems-box" data-tooltip="">Med Issues</div>
+                        </div>
+                    </div>
+
+                    <!-- Lifestyle Section -->
+                    <div class="section-container">
+                        <h3 class="text-sm font-medium mb-1">Lifestyle & Behavioral Health</h3>
+                        <div class="progress-bar">
+                            <div class="progress bg-green-600" id="lifestyle-progress"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="completion-box" id="lifestyle-diet-box" data-tooltip="">Diet</div>
+                            <div class="completion-box" id="lifestyle-activity-box" data-tooltip="">Activity</div>
+                            <div class="completion-box" id="lifestyle-mental-box" data-tooltip="">Mental Health</div>
+                            <div class="completion-box" id="lifestyle-cognitive-box" data-tooltip="">Cognitive</div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Info Section -->
+                    <div class="section-container">
+                        <h3 class="text-sm font-medium mb-1">Additional Information</h3>
+                        <div class="progress-bar">
+                            <div class="progress bg-yellow-600" id="additional-progress"></div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="completion-box" id="additional-conditions-box" data-tooltip="">Conditions</div>
+                            <div class="completion-box" id="additional-healthcare-box" data-tooltip="">Healthcare</div>
+                            <div class="completion-box" id="additional-concerns-box" data-tooltip="">Concerns</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Button -->
+                <div class="mt-6">
+                    <button id="downloadPdfBtn" class="action-btn download-btn w-full">Download PDF</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Section - Main Content -->
+        <section class="right-panel w-full lg:w-2/3 flex flex-col">
+            <!-- Tab Navigation -->
+            <div class="tabs bg-white rounded-lg shadow-md p-4 mb-4">
+                <div class="flex space-x-4">
+                    <button class="tab-btn active" data-tab="intake">Patient Intake</button>
+                    <button class="tab-btn" data-tab="summary">Doctor Summary</button>
+                    <button class="tab-btn" data-tab="followup">Follow Up</button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content flex-grow">
+                <!-- Patient Intake Tab -->
+                <div id="intakeTab" class="tab-pane active">
+                    <div class="chat-container bg-white rounded-lg shadow-md flex-grow flex flex-col">
+                        <div id="chatMessages" class="chat-messages"></div>
+                        <div id="loadingSpinner" class="loading-spinner hidden">
+                            <div class="spinner"></div>
+                            <p>Processing...</p>
+                        </div>
+                        <div class="chat-input-container">
+                            <div class="input-group">
+                                <button id="generateBtn" class="input-btn generate-btn">
+                                    Generate Example
+                                </button>
+                                <textarea id="chatInput" class="chat-input" placeholder="Type your response..." rows="1"></textarea>
+                                <div class="input-actions">
+                                    <button id="photoBtn" class="input-btn photo-btn">
+                                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                    </button>
+                                    <button id="micBtn" class="input-btn mic-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                        </svg>
+                                    </button>
+                                    <button id="sendBtn" class="input-btn send-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor Summary Tab -->
+                <div id="summaryTab" class="tab-pane hidden">
+                    <!-- Content will be dynamically loaded -->
+                </div>
+
+                <!-- Follow Up Tab -->
+                <div id="followupTab" class="tab-pane hidden">
+                    <!-- Content will be dynamically loaded -->
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
