@@ -18,47 +18,48 @@ body {
 }
 
 /* Progress Section Styles */
-.section-container {
-    margin-bottom: 1.5rem;
-}
-
-.progress-bar {
-    background-color: var(--border-color);
-    border-radius: 9999px;
-    height: 0.625rem;
-    overflow: hidden;
-    margin-bottom: 0.5rem;
-}
-
-.progress {
-    height: 100%;
-    transition: width 0.3s ease;
-    width: 0%;
-}
-
-/* Completion Box Styles */
-.completion-box {
-    height: 2.5rem;
-    background-color: var(--border-color);
-    border-radius: 0.375rem;
+.progress-item {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    position: relative;
-    cursor: pointer;
+    border-radius: 0.375rem;
     transition: all 0.3s ease;
 }
 
-.completion-box.completed {
+.progress-item:hover {
+    background-color: #f3f4f6;
+}
+
+.progress-item .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-item .text {
+    flex-grow: 1;
+}
+
+.progress-item.completed .icon {
     background-color: var(--success-color);
     color: white;
 }
 
+.progress-item.completed .text {
+    color: var(--success-color);
+}
+
 /* Tooltip Styles */
-.completion-box[data-tooltip]:before {
+.progress-item[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+
+.progress-item[data-tooltip]:before {
     content: attr(data-tooltip);
     position: absolute;
     bottom: 100%;
@@ -79,7 +80,7 @@ body {
     pointer-events: none;
 }
 
-.completion-box[data-tooltip]:hover:before {
+.progress-item[data-tooltip]:hover:before {
     opacity: 1;
     visibility: visible;
 }

@@ -32,6 +32,8 @@ function initializeUI() {
     // Note: Tooltips are now handled via CSS :hover using data-tooltip attribute
     // Initial tooltip values
     initializeTooltips();
+
+    updateProgressItems();
 }
 
 // Event Listeners Setup
@@ -107,6 +109,8 @@ async function handleMessageSend() {
         console.error('Error processing message:', error);
         addMessageToChat('bot', 'Sorry, there was an error processing your message. Please try again.');
     }
+
+    console.log("Current record:", JSON.stringify(state.currentRecord, null, 2));
 
     toggleLoadingSpinner(false);
 }
@@ -266,10 +270,15 @@ function updateProgressBars() {
     
     sections.forEach(section => {
         const completed = state.completedSections[section].size;
-        const total = document.querySelectorAll(`#${section}-progress`).length;
+        const total = document.querySelectorAll(`#${section}-progress ~ .grid .completion-box`).length;
         const percentage = (completed / total) * 100;
         
-        document.getElementById(`${section}-progress`).style.width = `${percentage}%`;
+        const progressBar = document.getElementById(`${section}-progress`);
+        if (progressBar) {
+            progressBar.style.width = `${percentage}%`;
+        } else {
+            console.warn(`Progress bar not found for section: ${section}`);
+        }
     });
 }
 
@@ -328,16 +337,28 @@ function updateTooltips(updates) {
 }
 
 function updateCompletionStatus(completedSections) {
-    for (const section of completedSections) {
-        const [category, item] = section.split('.');
-        state.completedSections[category].add(item);
-        
-        // Update UI
-        const box = document.getElementById(`${category}-${item}-box`);
-        if (box) {
-            box.classList.add('completed');
-        }
+    if (!Array.isArray(completedSections)) {
+        console.error('Invalid completedSections data:', completedSections);
+        return;
     }
+
+    completedSections.forEach(section => {
+        const [category, item] = section.split('-');
+        if (state.completedSections[category]) {
+            state.completedSections[category].add(item);
+            
+            // Update UI
+            const boxId = `${category}-${item}-box`;
+            const box = document.getElementById(boxId);
+            if (box) {
+                box.classList.add('completed');
+            } else {
+                console.warn(`Element not found: ${boxId}`);
+            }
+        } else {
+            console.warn(`Unknown category: ${category}`);
+        }
+    });
     
     updateProgressBars();
 }

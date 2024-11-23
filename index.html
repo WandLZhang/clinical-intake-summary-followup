@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Diabetes Care Assistant</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
-    <script src="app.js" defer></script>
+    <script type="module" src="js/app.js" defer></script>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
     <header class="bg-white shadow-md sticky top-0 z-10">
@@ -22,50 +22,9 @@
         <section class="w-full lg:w-1/3 mb-6">
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-lg font-semibold mb-4">Form Completion Progress</h2>
-                <div class="space-y-6">
-                    <!-- Symptoms Section -->
-                    <div class="section-container">
-                        <h3 class="text-sm font-medium mb-1">Symptoms & Management</h3>
-                        <div class="progress-bar">
-                            <div class="progress bg-blue-600" id="symptoms-progress"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="completion-box" id="symptoms-current-box" data-tooltip="">Symptoms</div>
-                            <div class="completion-box" id="symptoms-blood-sugar-box" data-tooltip="">Blood Sugar</div>
-                            <div class="completion-box" id="symptoms-medications-box" data-tooltip="">Medications</div>
-                            <div class="completion-box" id="symptoms-problems-box" data-tooltip="">Med Issues</div>
-                        </div>
-                    </div>
-
-                    <!-- Lifestyle Section -->
-                    <div class="section-container">
-                        <h3 class="text-sm font-medium mb-1">Lifestyle & Behavioral Health</h3>
-                        <div class="progress-bar">
-                            <div class="progress bg-green-600" id="lifestyle-progress"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="completion-box" id="lifestyle-diet-box" data-tooltip="">Diet</div>
-                            <div class="completion-box" id="lifestyle-activity-box" data-tooltip="">Activity</div>
-                            <div class="completion-box" id="lifestyle-mental-box" data-tooltip="">Mental Health</div>
-                            <div class="completion-box" id="lifestyle-cognitive-box" data-tooltip="">Cognitive</div>
-                        </div>
-                    </div>
-
-                    <!-- Additional Info Section -->
-                    <div class="section-container">
-                        <h3 class="text-sm font-medium mb-1">Additional Information</h3>
-                        <div class="progress-bar">
-                            <div class="progress bg-yellow-600" id="additional-progress"></div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2">
-                            <div class="completion-box" id="additional-conditions-box" data-tooltip="">Conditions</div>
-                            <div class="completion-box" id="additional-healthcare-box" data-tooltip="">Healthcare</div>
-                            <div class="completion-box" id="additional-concerns-box" data-tooltip="">Concerns</div>
-                        </div>
-                    </div>
+                <div id="progressList" class="space-y-2">
+                    <!-- Progress items will be dynamically inserted here -->
                 </div>
-
-                <!-- Download Button -->
                 <div class="mt-6">
                     <button id="downloadPdfBtn" class="action-btn download-btn w-full">Download PDF</button>
                 </div>
