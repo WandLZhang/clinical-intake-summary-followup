@@ -158,6 +158,21 @@ body {
     margin-right: auto;
 }
 
+.bot-message ul {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.bot-message li {
+    margin-bottom: 5px;
+}
+
+.bot-message strong {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 .chat-input:focus {
     outline: none;
     border-color: var(--primary-color);

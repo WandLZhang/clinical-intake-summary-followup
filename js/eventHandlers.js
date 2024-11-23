@@ -1,7 +1,7 @@
 import { state, updateState } from './state.js';
 import { updateProgressItems, updateCompletionStatus, addMessageToChat, toggleLoadingSpinner, handleTabChange } from './ui.js';
 import { callCloudFunction, uploadMedicationImage } from './api.js';
-import { autoResizeTextArea } from './utils.js';
+import { autoResizeTextArea, sanitizeString } from './utils.js';
 
 export function setupEventListeners() {
     // Tab Navigation
@@ -71,8 +71,15 @@ export async function handleMessageSend() {
             console.log("No new sections completed in this update");
         }
         
+        let botMessage = '';
         if (response.message) {
-            addMessageToChat('bot', response.message);
+            botMessage = response.message;
+        } else if (response.next_prompt && response.next_prompt.prompt) {
+            botMessage = response.next_prompt.prompt;
+        }
+
+        if (botMessage) {
+            addMessageToChat('bot', formatBotMessage(botMessage));
         }
 
         if (response.next_prompt) {
@@ -92,6 +99,42 @@ export async function handleMessageSend() {
         console.log("Current record:", JSON.stringify(state.currentRecord, null, 2));
         toggleLoadingSpinner(false);
     }
+}
+
+function formatBotMessage(message) {
+    const lines = message.split('\n');
+    
+    const formattedLines = lines.map(line => {
+        line = sanitizeString(line);
+        
+        if (line.trim().endsWith('?')) {
+            return `<strong>${line}</strong>`;
+        }
+        
+        if (line.trim().startsWith('-')) {
+            return `<li>${line.trim().substring(1).trim()}</li>`;
+        }
+        
+        return line;
+    });
+
+    let formattedMessage = '';
+    let inList = false;
+    formattedLines.forEach(line => {
+        if (line.startsWith('<li>') && !inList) {
+            formattedMessage += '<ul>';
+            inList = true;
+        } else if (!line.startsWith('<li>') && inList) {
+            formattedMessage += '</ul>';
+            inList = false;
+        }
+        formattedMessage += line;
+    });
+    if (inList) {
+        formattedMessage += '</ul>';
+    }
+
+    return formattedMessage;
 }
 
 export function toggleVoiceInput() {
