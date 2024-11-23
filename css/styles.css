@@ -105,18 +105,38 @@ body {
 }
 
 /* Tab Styles */
+.tabs {
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    margin-bottom: -1px;
+    display: flex;
+    gap: 4px;
+    border-radius: 8px 8px 0 0;
+}
+
 .tab-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
     font-weight: 600;
-    transition: all 0.3s ease;
     color: var(--text-color);
     cursor: pointer;
+    transform: translateY(1px);
+    transition: all 0.2s ease;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+}
+
+.tab-btn:not(.active) {
+    background: #f8f9fa;
+    transform: translateY(3px);
 }
 
 .tab-btn.active {
-    background-color: var(--primary-color);
-    color: white;
+    z-index: 2;
+    border-bottom-color: white;
 }
 
 .tab-pane {
@@ -127,11 +147,22 @@ body {
     display: block;
 }
 
+.tab-content {
+    /* remove the border line */
+    border-radius: 0 8px 8px 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 1;
+}
+
 /* Chat Container Styles */
 .chat-container {
     height: calc(100vh - 12rem);
     display: flex;
     flex-direction: column;
+    border-bottom: none;
+    border-radius: 0 0 0 0;
 }
 
 .chat-messages {
@@ -203,7 +234,7 @@ body {
     max-height: 200px;
     line-height: 1.5;
     font-size: 0.95rem;
-    min-width: 0; /* Allow shrinking below content size */
+    min-width: 0;
 }
 
 .input-actions {

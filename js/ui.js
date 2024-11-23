@@ -11,6 +11,9 @@ export function initializeUI() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     
     updateProgressItems();
+    
+    // Add this line at the end:
+addMessageToChat('bot', 'Welcome to intake! 🩺 Go ahead and describe your condition and we will walk you through the rest of the information collection. 📋');
 }
 
 export function updateProgressItems() {
