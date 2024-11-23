@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { state, updateCompletedSections } from './state.js';
 import { getTooltipContent } from './utils.js';
 
 export function initializeUI() {
@@ -35,39 +35,46 @@ export function updateProgressItems() {
         const itemElement = document.createElement('div');
         itemElement.id = `${item.id}-item`;
         itemElement.className = 'progress-item';
+        const isCompleted = state.completedSections.has(item.id);
+        if (isCompleted) {
+            itemElement.classList.add('completed');
+        }
         itemElement.innerHTML = `
-            <div class="icon">○</div>
+            <div class="icon">${isCompleted ? '✓' : '○'}</div>
             <div class="text">${item.text}</div>
         `;
-        itemElement.setAttribute('data-tooltip', 'Not completed');
+        itemElement.setAttribute('data-tooltip', getTooltipContent(item.id.split('-')[0], item.id.split('-')[1]));
         progressList.appendChild(itemElement);
     });
 }
 
+
 export function updateCompletionStatus(completedSections) {
-    if (!Array.isArray(completedSections)) {
-        console.error('Invalid completedSections data:', completedSections);
+    console.log("Updating completion status with:", completedSections);
+
+    if (!Array.isArray(completedSections) || completedSections.length === 0) {
+        console.log('No sections completed or invalid data');
         return;
     }
 
     completedSections.forEach(section => {
-        const [category, item] = section.split('-');
-        if (state.completedSections[category]) {
-            state.completedSections[category].add(item);
-            
-            // Update UI
-            const itemElement = document.getElementById(`${section}-item`);
-            if (itemElement) {
-                itemElement.classList.add('completed');
-                itemElement.querySelector('.icon').textContent = '✓';
-                updateTooltip(section);
-            } else {
-                console.warn(`Element not found: ${section}-item`);
-            }
+        console.log(`Checking section: ${section}`);
+        const itemElement = document.getElementById(`${section}-item`);
+        if (itemElement) {
+            console.log(`Updating element: ${section}-item`);
+            itemElement.classList.add('completed');
+            itemElement.querySelector('.icon').textContent = '✓';
+            updateTooltip(section);
         } else {
-            console.warn(`Unknown category: ${category}`);
+            console.warn(`Element not found: ${section}-item`);
         }
     });
+
+    // Update the state
+    updateCompletedSections(completedSections);
+
+    // Refresh the progress items
+    updateProgressItems();
 }
 
 export function updateTooltips() {

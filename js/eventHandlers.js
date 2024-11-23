@@ -1,6 +1,6 @@
 import { state, updateState } from './state.js';
 import { updateProgressItems, updateCompletionStatus, addMessageToChat, toggleLoadingSpinner, handleTabChange } from './ui.js';
-import { callCloudFunction } from './api.js';
+import { callCloudFunction, uploadMedicationImage } from './api.js';
 import { autoResizeTextArea } from './utils.js';
 
 export function setupEventListeners() {
@@ -45,12 +45,9 @@ export async function handleMessageSend() {
     const message = chatInput.value.trim();
     if (!message) return;
 
-    // Add user message to chat
     addMessageToChat('user', message);
     chatInput.value = '';
     autoResizeTextArea(chatInput);
-
-    // Show loading state
     toggleLoadingSpinner(true);
 
     try {
@@ -60,31 +57,41 @@ export async function handleMessageSend() {
             currentPrompt: state.currentPrompt
         });
         
-        // Update current record
+        console.log("Full response from backend:", response);
+
         if (response.updated_record) {
             updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
         }
         
-        // Update completion status
-        if (response.completedSections) {
+        if (Array.isArray(response.completedSections) && response.completedSections.length > 0) {
+            console.log("Completed sections:", response.completedSections);
             updateCompletionStatus(response.completedSections);
+            // Note: updateCompletionStatus now handles both UI updates and state management
+        } else {
+            console.log("No new sections completed in this update");
         }
         
-        // Add bot response to chat
         if (response.message) {
             addMessageToChat('bot', response.message);
         }
 
-        // Update tooltips
-        updateProgressItems();
+        if (response.next_prompt) {
+            updateState({ currentPrompt: response.next_prompt });
+        }
+
+        if (response.ready_to_insert) {
+            console.log("All required information collected. Ready to insert into database.");
+            // Trigger action for completed form (e.g., switch to summary tab)
+        }
+
     } catch (error) {
         console.error('Error processing message:', error);
+        console.error('Error stack:', error.stack);
         addMessageToChat('bot', 'Sorry, there was an error processing your message. Please try again.');
+    } finally {
+        console.log("Current record:", JSON.stringify(state.currentRecord, null, 2));
+        toggleLoadingSpinner(false);
     }
-
-    console.log("Current record:", JSON.stringify(state.currentRecord, null, 2));
-
-    toggleLoadingSpinner(false);
 }
 
 export function toggleVoiceInput() {
@@ -127,24 +134,37 @@ export async function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append('image', file);
-
     toggleLoadingSpinner(true);
 
     try {
         // Upload image and process medication info
-        const response = await callCloudFunction('processMedicationImage', formData);
+        const response = await uploadMedicationImage(file);
         
         // Add image preview to chat
-        const imageMessage = `<img src="${URL.createObjectURL(file)}" alt="Medication Image">`;
+        const imageMessage = `<img src="${URL.createObjectURL(file)}" alt="Medication Image" class="chat-image">`;
         addMessageToChat('user', imageMessage);
         
         // Add extracted information
-        addMessageToChat('bot', response.medicationInfo);
+        if (response.medicationInfo) {
+            addMessageToChat('bot', response.medicationInfo);
+        }
         
-        // Update completion status
-        updateCompletionStatus(response.completedSections);
+        // Update completion status if provided
+        if (response.completedSections) {
+            console.log("Completed sections:", response.completedSections);
+            updateCompletionStatus(response.completedSections);
+            updateCompletedSections(response.completedSections);
+            updateProgressItems();  // Add this line if it's not already there
+        }
+
+        // Update current record if provided
+        if (response.updated_record) {
+            updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
+        }
+
+        // Update tooltips
+        updateProgressItems();
+
     } catch (error) {
         console.error('Error processing image:', error);
         addMessageToChat('bot', 'Sorry, there was an error processing your image. Please try again.');
@@ -166,7 +186,20 @@ export async function generateDemoAnswers() {
             await new Promise(resolve => setTimeout(resolve, 500)); // Add delay between messages
         }
         
-        updateCompletionStatus(response.completedSections);
+        if (response.completedSections) {
+            console.log("Completed sections:", response.completedSections);
+            updateCompletionStatus(response.completedSections);
+            updateCompletedSections(response.completedSections);
+            updateProgressItems();  // Add this line if it's not already there
+        }
+
+        if (response.updated_record) {
+            updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
+        }
+
+        // Update tooltips
+        updateProgressItems();
+
     } catch (error) {
         console.error('Error generating demo answers:', error);
         addMessageToChat('bot', 'Sorry, there was an error generating demo answers. Please try again.');
