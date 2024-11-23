@@ -18,6 +18,11 @@ export function autoResizeTextArea(textarea) {
  * @returns {string} - The tooltip content.
  */
 export function getTooltipContent(category, subcategory) {
+    //console.log(`getTooltipContent called with category: ${category}, subcategory: ${subcategory}`);
+    if (category === 'symptoms' && subcategory === 'blood') {
+        subcategory = 'blood-sugar';
+    }
+    
     const record = state.currentRecord[category];
     if (!record) return 'Not completed';
 
@@ -30,7 +35,16 @@ export function getTooltipContent(category, subcategory) {
                 .join(', ');
             return content ? `Current symptoms: ${content}` : 'No current symptoms reported';
         case 'symptoms-blood-sugar':
-            return record.blood_sugar ? `Check frequency: ${record.blood_sugar.check_frequency}, Fasting range: ${record.blood_sugar.fasting_range}, Post-meal range: ${record.blood_sugar.post_meal_range}` : 'Blood sugar information not provided';
+            console.log('Matched symptoms-blood-sugar case');
+            if (record.blood_sugar) {
+                const bs = record.blood_sugar;
+                const parts = [];
+                if (bs.check_frequency) parts.push(`Check frequency: ${bs.check_frequency}`);
+                if (bs.fasting_range) parts.push(`Fasting range: ${bs.fasting_range}`);
+                if (bs.post_meal_range) parts.push(`Post-meal range: ${bs.post_meal_range}`);
+                return parts.length ? parts.join(', ') : 'Partial blood sugar information available';
+            }
+            return 'Blood sugar information not provided';
         case 'symptoms-medications':
             return record.medications && record.medications.medication_list ? `Medications: ${record.medications.medication_list.join(', ')}` : 'No medications reported';
         case 'symptoms-problems':

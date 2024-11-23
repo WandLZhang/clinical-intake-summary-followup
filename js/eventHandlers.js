@@ -61,11 +61,13 @@ export async function handleMessageSend() {
 
         if (response.updated_record) {
             updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
+            updateProgressItems(); 
         }
         
         if (Array.isArray(response.completedSections) && response.completedSections.length > 0) {
             console.log("Completed sections:", response.completedSections);
             updateCompletionStatus(response.completedSections);
+            updateProgressItems();
             // Note: updateCompletionStatus now handles both UI updates and state management
         } else {
             console.log("No new sections completed in this update");
@@ -203,6 +205,7 @@ export async function handleImageUpload(event) {
         // Update current record if provided
         if (response.updated_record) {
             updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
+            updateProgressItems(); 
         }
 
         // Update tooltips
@@ -238,6 +241,7 @@ export async function generateDemoAnswers() {
 
         if (response.updated_record) {
             updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
+            updateProgressItems(); 
         }
 
         // Update tooltips
