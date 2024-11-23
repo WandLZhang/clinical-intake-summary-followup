@@ -172,7 +172,7 @@ body {
 
 .input-group {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -187,12 +187,13 @@ body {
     max-height: 200px;
     line-height: 1.5;
     font-size: 0.95rem;
+    min-width: 0; /* Allow shrinking below content size */
 }
 
 .input-actions {
     display: flex;
     gap: 0.5rem;
-    flex-shrink: 0;  /* Prevent shrinking */
+    flex-shrink: 0;
 }
 
 /* Input Buttons */
@@ -208,7 +209,7 @@ body {
     justify-content: center;
     height: 42px;
     width: 42px;
-    flex-shrink: 0;  /* Prevent shrinking */
+    flex-shrink: 0;
 }
 
 .input-btn.generate-btn {
@@ -296,9 +297,9 @@ body {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .input-group {
-        flex-wrap: wrap;
+        flex-direction: column;
     }
     
     .input-btn.generate-btn {
@@ -308,11 +309,11 @@ body {
     }
     
     .chat-input {
-        order: 2;
+        order: 0;
     }
     
     .input-actions {
-        order: 3;
+        order: 1;
         margin-top: 0.5rem;
         width: 100%;
         justify-content: flex-end;
