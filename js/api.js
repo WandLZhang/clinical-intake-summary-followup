@@ -6,7 +6,8 @@ const endpoints = {
     'processMessage': `${BASE_URL}/dha-processMessage`,
     'generateRecommendations': `${BASE_URL}/dha-generateRecommendations`,
     'generateFollowUp': `${BASE_URL}/dha-generateFollowUp`,
-    'processMedicationImage': `${BASE_URL}/dha-processMedicationImage`
+    'processMedicationImage': `${BASE_URL}/dha-processMedicationImage`,
+    'doctorSummaryAndQA': `${BASE_URL}/dha-doctorSummaryAndQA`
 };
 
 /**

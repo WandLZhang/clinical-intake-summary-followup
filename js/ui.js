@@ -134,6 +134,32 @@ export async function handleTabChange(tabName) {
     }
 }
 
+async function loadFollowUpContent() {
+    toggleLoadingSpinner(true);
+
+    try {
+        const followup = await callCloudFunction('generateFollowUp');
+        const followupTab = document.getElementById('followupTab');
+        followupTab.innerHTML = followup.html;
+    } catch (error) {
+        console.error('Error loading follow-up content:', error);
+    }
+
+    toggleLoadingSpinner(false);
+}
+
+export function initializeSummaryTab() {
+    const qaSubmitBtn = document.getElementById('qaSubmit');
+    const qaInput = document.getElementById('qaInput');
+
+    qaSubmitBtn.addEventListener('click', handleQASubmit);
+    qaInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleQASubmit();
+        }
+    });
+}
+
 async function loadDoctorSummary() {
     toggleLoadingSpinner(true);
     try {
@@ -146,20 +172,6 @@ async function loadDoctorSummary() {
         console.error('Error loading doctor summary:', error);
         document.getElementById('doctorSummaryContent').innerHTML = 'Error loading summary. Please try again.';
     }
-    toggleLoadingSpinner(false);
-}
-
-async function loadFollowUpContent() {
-    toggleLoadingSpinner(true);
-
-    try {
-        const followup = await callCloudFunction('generateFollowUp');
-        const followupTab = document.getElementById('followupTab');
-        followupTab.innerHTML = followup.html;
-    } catch (error) {
-        console.error('Error loading follow-up content:', error);
-    }
-
     toggleLoadingSpinner(false);
 }
 
