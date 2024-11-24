@@ -223,29 +223,16 @@ export async function generateDemoAnswers() {
     toggleLoadingSpinner(true);
 
     try {
-        const response = await callCloudFunction('generateDemoAnswers');
+        const response = await fetch('example_narrative.txt');
+        const text = await response.text();
         
-        // Process each demo answer
-        for (const answer of response.answers) {
-            addMessageToChat('user', answer.question);
-            addMessageToChat('bot', answer.response);
-            await new Promise(resolve => setTimeout(resolve, 500)); // Add delay between messages
-        }
+        const chatInput = document.getElementById('chatInput');
+        chatInput.value = text;
+        autoResizeTextArea(chatInput);
         
-        if (response.completedSections) {
-            console.log("Completed sections:", response.completedSections);
-            updateCompletionStatus(response.completedSections);
-            updateCompletedSections(response.completedSections);
-            updateProgressItems();  // Add this line if it's not already there
-        }
-
-        if (response.updated_record) {
-            updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
-            updateProgressItems(); 
-        }
-
-        // Update tooltips
-        updateProgressItems();
+        // Trigger the input event to update any listeners
+        const event = new Event('input', { bubbles: true });
+        chatInput.dispatchEvent(event);
 
     } catch (error) {
         console.error('Error generating demo answers:', error);
@@ -255,34 +242,98 @@ export async function generateDemoAnswers() {
     toggleLoadingSpinner(false);
 }
 
-export async function downloadPatientRecord() {
-    toggleLoadingSpinner(true);
+function generatePrintableHTML(record) {
+    return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Patient Record</title>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                h1 { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px; }
+                h2 { color: #1d4ed8; margin-top: 20px; }
+                .section { margin-bottom: 30px; }
+                .subsection { margin-left: 20px; }
+                @media print {
+                    body { font-size: 12pt; }
+                    h1 { font-size: 18pt; }
+                    h2 { font-size: 16pt; }
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Patient Record</h1>
+            
+            <div class="section">
+                <h2>Symptoms</h2>
+                <div class="subsection">
+                    <h3>Current Symptoms</h3>
+                    <p>${Object.keys(record.symptoms.current).filter(key => record.symptoms.current[key]).join(', ') || 'None reported'}</p>
+                    
+                    <h3>Blood Sugar</h3>
+                    <p>Check Frequency: ${record.symptoms.blood_sugar.check_frequency || 'Not provided'}</p>
+                    <p>Fasting Range: ${record.symptoms.blood_sugar.fasting_range || 'Not provided'}</p>
+                    <p>Post-meal Range: ${record.symptoms.blood_sugar.post_meal_range || 'Not provided'}</p>
+                    
+                    <h3>Medications</h3>
+                    <ul>
+                        ${record.symptoms.medications.medication_list.map(med => `<li>${med.name} (${med.dosage})</li>`).join('')}
+                    </ul>
+                    <p>Adherence: ${record.symptoms.medications.adherence || 'Not provided'}</p>
+                    <p>Problems: ${record.symptoms.medications.problems || 'None reported'}</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Lifestyle</h2>
+                <div class="subsection">
+                    <h3>Diet</h3>
+                    <p>Description: ${record.lifestyle.diet.description || 'Not provided'}</p>
+                    <p>Fruits and Vegetables: ${record.lifestyle.diet.fruits_vegetables_frequency || 'Not provided'}</p>
+                    
+                    <h3>Physical Activity</h3>
+                    <p>Frequency: ${record.lifestyle.activity.frequency || 'Not provided'}</p>
+                    
+                    <h3>Mental Health</h3>
+                    <p>${Object.keys(record.lifestyle.mental.symptoms).filter(key => record.lifestyle.mental.symptoms[key]).join(', ') || 'No issues reported'}</p>
+                    
+                    <h3>Cognitive Function</h3>
+                    <p>${record.lifestyle.cognitive.status || 'Not provided'}</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Additional Information</h2>
+                <div class="subsection">
+                    <h3>Other Conditions</h3>
+                    <p>${Object.keys(record.additional.conditions).join(', ') || 'None reported'}</p>
+                    
+                    <h3>Healthcare Provider</h3>
+                    <p>Name: ${record.additional.healthcare.provider_name || 'Not provided'}</p>
+                    <p>Last Visit: ${record.additional.healthcare.last_visit || 'Not provided'}</p>
+                    
+                    <h3>Additional Concerns</h3>
+                    <p>${record.additional.concerns || 'None reported'}</p>
+                </div>
+            </div>
+        </body>
+        </html>
+    `;
+}
 
-    try {
-        const response = await callCloudFunction('downloadPdf', { currentRecord: state.currentRecord });
-        
-        // Create a Blob from the PDF Stream
-        const file = new Blob([response.pdfBuffer], { type: 'application/pdf' });
-        
-        // Create a link element, hide it, direct it towards the blob, and then 'click' it programatically
-        const a = document.createElement("a");
-        a.style = "display: none";
-        document.body.appendChild(a);
-        
-        // Create a DOMString representing the blob and point the link element towards it
-        const url = window.URL.createObjectURL(file);
-        a.href = url;
-        a.download = 'patient_record.pdf';
-        
-        // Programatically click the link to trigger the download
-        a.click();
-        
-        // Release the reference to the file by revoking the Object URL
-        window.URL.revokeObjectURL(url);
-    } catch (error) {
-        console.error('Error downloading PDF:', error);
-        alert('Sorry, there was an error downloading the PDF. Please try again.');
-    }
+export function downloadPatientRecord() {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(generatePrintableHTML(state.currentRecord));
+    printWindow.document.close();
+    printWindow.focus();
 
-    toggleLoadingSpinner(false);
+    // Wait for content to load before printing
+    printWindow.onload = function() {
+        printWindow.print();
+        printWindow.onafterprint = function() {
+            printWindow.close();
+        };
+    };
 }
