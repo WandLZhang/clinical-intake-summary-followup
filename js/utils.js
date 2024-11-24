@@ -95,9 +95,19 @@ export function getTooltipContent(category, subcategory) {
             }
             return 'Cognitive information not provided';
         case 'additional-conditions':
-            return record.conditions && record.conditions.description ? `Other conditions: ${record.conditions.description}` : 'No additional conditions reported';
+            if (record.conditions) {
+                content = extractInfo(record.conditions).join(', ');
+                return content ? `Other conditions: ${content}` : 'No additional conditions reported';
+            }
+            return 'No additional conditions reported';
+
         case 'additional-healthcare':
-            return record.healthcare && record.healthcare.provider_details ? `Healthcare provider: ${record.healthcare.provider_details}` : 'No healthcare provider information';
+            if (record.healthcare) {
+                content = extractInfo(record.healthcare).join(', ');
+                return content ? `Healthcare provider: ${content}` : 'No healthcare provider information';
+            }
+            return 'No healthcare provider information';
+            
         case 'additional-concerns':
             return record.concerns ? `Concerns: ${record.concerns}` : 'No additional concerns reported';
         default:
