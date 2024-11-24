@@ -83,7 +83,22 @@
 
                 <!-- Doctor Summary Tab -->
                 <div id="summaryTab" class="tab-pane hidden">
-                    <!-- Content will be dynamically loaded -->
+                    <div id="doctorSummaryContent" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <!-- Summary content will be dynamically loaded here -->
+                    </div>
+                    <div id="doctorQASection" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h3 class="text-lg font-semibold mb-4">Ask a Question</h3>
+                        <div id="qaChat" class="mb-4"></div>
+                        <div class="flex">
+                            <input type="text" id="qaInput" class="flex-grow mr-2 p-2 border rounded" placeholder="Type your question...">
+                            <button id="qaSubmit" class="bg-blue-500 text-white px-4 py-2 rounded">Ask</button>
+                        </div>
+                    </div>
+                    <div id="recommendationsSection" class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">Recommendations</h3>
+                        <button id="generateRecommendations" class="bg-green-500 text-white px-4 py-2 rounded mb-4">Generate Recommendations</button>
+                        <div id="recommendationsContent"></div>
+                    </div>
                 </div>
 
                 <!-- Follow Up Tab -->

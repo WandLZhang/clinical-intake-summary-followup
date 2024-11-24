@@ -38,6 +38,16 @@ export function setupEventListeners() {
 
     // Download PDF
     document.getElementById('downloadPdfBtn').addEventListener('click', downloadPatientRecord);
+
+    // New event listeners for Doctor Summary tab
+    document.getElementById('qaSubmit').addEventListener('click', handleQASubmit);
+    document.getElementById('qaInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleQASubmit();
+        }
+    });
+    document.getElementById('generateRecommendations').addEventListener('click', handleGenerateRecommendations);
+
 }
 
 export async function handleMessageSend() {
@@ -336,4 +346,42 @@ export function downloadPatientRecord() {
             printWindow.close();
         };
     };
+}
+
+async function handleQASubmit() {
+    const qaInput = document.getElementById('qaInput');
+    const question = qaInput.value.trim();
+    if (!question) return;
+
+    const qaChat = document.getElementById('qaChat');
+    qaChat.innerHTML += `<p><strong>Q:</strong> ${sanitizeString(question)}</p>`;
+    qaInput.value = '';
+
+    toggleLoadingSpinner(true);
+    try {
+        const response = await callCloudFunction('doctorSummaryAndQA', { 
+            action: 'question',
+            question: question,
+            currentRecord: state.currentRecord 
+        });
+        qaChat.innerHTML += `<p><strong>A:</strong> ${sanitizeString(response.answer)}</p>`;
+    } catch (error) {
+        console.error('Error getting answer:', error);
+        qaChat.innerHTML += `<p><strong>A:</strong> Sorry, there was an error processing your question. Please try again.</p>`;
+    }
+    toggleLoadingSpinner(false);
+    qaChat.scrollTop = qaChat.scrollHeight;
+}
+
+async function handleGenerateRecommendations() {
+    toggleLoadingSpinner(true);
+    const recommendationsContent = document.getElementById('recommendationsContent');
+    try {
+        const response = await callCloudFunction('generateRecommendations', { currentRecord: state.currentRecord });
+        recommendationsContent.innerHTML = response.recommendations;
+    } catch (error) {
+        console.error('Error generating recommendations:', error);
+        recommendationsContent.innerHTML = 'Error generating recommendations. Please try again.';
+    }
+    toggleLoadingSpinner(false);
 }

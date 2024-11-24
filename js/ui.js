@@ -136,18 +136,16 @@ export async function handleTabChange(tabName) {
 
 async function loadDoctorSummary() {
     toggleLoadingSpinner(true);
-
     try {
-        const summary = await callCloudFunction('generateDoctorSummary');
-        const summaryTab = document.getElementById('summaryTab');
-        summaryTab.innerHTML = summary.html;
-        
-        // Setup event listeners for summary tab interactions
-        setupSummaryTabListeners();
+        const response = await callCloudFunction('doctorSummaryAndQA', { 
+            action: 'summary',
+            currentRecord: state.currentRecord 
+        });
+        document.getElementById('doctorSummaryContent').innerHTML = response.summary;
     } catch (error) {
         console.error('Error loading doctor summary:', error);
+        document.getElementById('doctorSummaryContent').innerHTML = 'Error loading summary. Please try again.';
     }
-
     toggleLoadingSpinner(false);
 }
 

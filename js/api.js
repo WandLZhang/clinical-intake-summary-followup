@@ -4,12 +4,8 @@ const BASE_URL = 'https://us-central1-gemini-med-lit-review.cloudfunctions.net';
 // Define endpoints for each cloud function
 const endpoints = {
     'processMessage': `${BASE_URL}/dha-processMessage`,
-    'generateDemoAnswers': `${BASE_URL}/dha-generateDemo`,
-    'generateDoctorSummary': `${BASE_URL}/dha-doctorSummary`,
-    'askQuestions': `${BASE_URL}/dha-askQuestions`,
     'generateRecommendations': `${BASE_URL}/dha-generateRecommendations`,
     'generateFollowUp': `${BASE_URL}/dha-generateFollowUp`,
-    'downloadPdf': `${BASE_URL}/dha-downloadPdf`,
     'processMedicationImage': `${BASE_URL}/dha-processMedicationImage`
 };
 
@@ -71,34 +67,6 @@ export async function uploadMedicationImage(file) {
         return await response.json();
     } catch (error) {
         console.error('Error uploading medication image:', error);
-        throw error;
-    }
-}
-
-/**
- * Downloads the patient record as a PDF.
- * 
- * @param {Object} currentRecord - The current patient record.
- * @returns {Promise<Blob>} - A Blob containing the PDF data.
- * @throws {Error} - If there's an error downloading the PDF.
- */
-export async function downloadPatientRecordPdf(currentRecord) {
-    try {
-        const response = await fetch(endpoints.downloadPdf, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ currentRecord })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return await response.blob();
-    } catch (error) {
-        console.error('Error downloading PDF:', error);
         throw error;
     }
 }
