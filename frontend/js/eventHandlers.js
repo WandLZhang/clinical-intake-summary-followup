@@ -193,25 +193,31 @@ export async function handleImageUpload(event) {
 
     try {
         // Upload image and process medication info
-        const response = await uploadMedicationImage(file);
+        const formData = new FormData();
+        formData.append('image', file);
+        const response = await uploadMedicationImage(formData);
         
         // Add image preview to chat
         const imageMessage = `<img src="${URL.createObjectURL(file)}" alt="Medication Image" class="chat-image">`;
         addMessageToChat('user', imageMessage);
         
-        // Add extracted information
-        if (response.medicationInfo) {
-            addMessageToChat('bot', response.medicationInfo);
+        if (response.medicationInfo && response.medicationInfo.length > 0) {
+            // Format extracted medication information
+            const medicationList = response.medicationInfo.map(med => 
+                `${med.name} (${med.dosage})`
+            ).join(', ');
+            
+            const confirmationMessage = `I've detected the following medications: ${medicationList}. Is this correct?`;
+            addMessageToChat('bot', confirmationMessage);
+            
+            // Populate chat input with extracted info for user confirmation
+            const chatInput = document.getElementById('chatInput');
+            chatInput.value = `Medications: ${medicationList}`;
+            autoResizeTextArea(chatInput);
+        } else {
+            addMessageToChat('bot', "I couldn't detect any medications in the image. Could you please list your medications and dosages?");
         }
         
-        // Update completion status if provided
-        if (response.completedSections) {
-            console.log("Completed sections:", response.completedSections);
-            updateCompletionStatus(response.completedSections);
-            updateCompletedSections(response.completedSections);
-            updateProgressItems();  // Add this line if it's not already there
-        }
-
         // Update current record if provided
         if (response.updated_record) {
             updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
@@ -223,7 +229,7 @@ export async function handleImageUpload(event) {
 
     } catch (error) {
         console.error('Error processing image:', error);
-        addMessageToChat('bot', 'Sorry, there was an error processing your image. Please try again.');
+        addMessageToChat('bot', 'Sorry, there was an error processing your image. Could you please type out your medications and dosages?');
     }
 
     toggleLoadingSpinner(false);
