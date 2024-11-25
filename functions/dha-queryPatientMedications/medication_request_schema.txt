@@ -1,0 +1,4560 @@
+[
+  {
+    "fields": [
+      {
+        "name": "carePlanId",
+        "type": "STRING"
+      },
+      {
+        "name": "medicationRequestId",
+        "type": "STRING"
+      },
+      {
+        "name": "procedureRequestId",
+        "type": "STRING"
+      },
+      {
+        "name": "referralRequestId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "basedOn",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "version",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          },
+          {
+            "name": "userSelected",
+            "type": "BOOLEAN"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "coding",
+        "type": "RECORD"
+      },
+      {
+        "name": "text",
+        "type": "STRING"
+      }
+    ],
+    "name": "category",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "activityDefinitionId",
+        "type": "STRING"
+      },
+      {
+        "name": "planDefinitionId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "definition",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "detectedIssueId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "detectedIssue",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "start",
+            "type": "STRING"
+          },
+          {
+            "name": "end",
+            "type": "STRING"
+          }
+        ],
+        "name": "validityPeriod",
+        "type": "RECORD"
+      },
+      {
+        "name": "numberOfRepeatsAllowed",
+        "type": "INTEGER"
+      },
+      {
+        "fields": [
+          {
+            "name": "value",
+            "type": "FLOAT"
+          },
+          {
+            "name": "unit",
+            "type": "STRING"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          }
+        ],
+        "name": "quantity",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "value",
+            "type": "FLOAT"
+          },
+          {
+            "name": "comparator",
+            "type": "STRING"
+          },
+          {
+            "name": "unit",
+            "type": "STRING"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          }
+        ],
+        "name": "expectedSupplyDuration",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "organizationId",
+            "type": "STRING"
+          },
+          {
+            "name": "reference",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "use",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "version",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "userSelected",
+                        "type": "BOOLEAN"
+                      }
+                    ],
+                    "mode": "REPEATED",
+                    "name": "coding",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "text",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "type",
+                "type": "RECORD"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "start",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "end",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "period",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "organizationId",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "reference",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "use",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "fields": [
+                              {
+                                "name": "system",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "version",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "code",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "display",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "userSelected",
+                                "type": "BOOLEAN"
+                              }
+                            ],
+                            "mode": "REPEATED",
+                            "name": "coding",
+                            "type": "RECORD"
+                          },
+                          {
+                            "name": "text",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "type",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "value",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "start",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "end",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "period",
+                        "type": "RECORD"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "organizationId",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "reference",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "assigner",
+                        "type": "RECORD"
+                      }
+                    ],
+                    "name": "identifier",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "assigner",
+                "type": "RECORD"
+              }
+            ],
+            "name": "identifier",
+            "type": "RECORD"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          }
+        ],
+        "name": "performer",
+        "type": "RECORD"
+      }
+    ],
+    "name": "dispenseRequest",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "provenanceId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "eventHistory",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "use",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "type",
+        "type": "RECORD"
+      },
+      {
+        "name": "system",
+        "type": "STRING"
+      },
+      {
+        "name": "value",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "start",
+            "type": "STRING"
+          },
+          {
+            "name": "end",
+            "type": "STRING"
+          }
+        ],
+        "name": "period",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "organizationId",
+            "type": "STRING"
+          },
+          {
+            "name": "reference",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "use",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "version",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "userSelected",
+                        "type": "BOOLEAN"
+                      }
+                    ],
+                    "mode": "REPEATED",
+                    "name": "coding",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "text",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "type",
+                "type": "RECORD"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "start",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "end",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "period",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "organizationId",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "reference",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "use",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "fields": [
+                              {
+                                "name": "system",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "version",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "code",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "display",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "userSelected",
+                                "type": "BOOLEAN"
+                              }
+                            ],
+                            "mode": "REPEATED",
+                            "name": "coding",
+                            "type": "RECORD"
+                          },
+                          {
+                            "name": "text",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "type",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "value",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "start",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "end",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "period",
+                        "type": "RECORD"
+                      }
+                    ],
+                    "name": "identifier",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "assigner",
+                "type": "RECORD"
+              }
+            ],
+            "name": "identifier",
+            "type": "RECORD"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          }
+        ],
+        "name": "assigner",
+        "type": "RECORD"
+      }
+    ],
+    "name": "groupIdentifier",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "use",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "type",
+        "type": "RECORD"
+      },
+      {
+        "name": "system",
+        "type": "STRING"
+      },
+      {
+        "name": "value",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "start",
+            "type": "STRING"
+          },
+          {
+            "name": "end",
+            "type": "STRING"
+          }
+        ],
+        "name": "period",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "organizationId",
+            "type": "STRING"
+          },
+          {
+            "name": "reference",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "use",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "version",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "userSelected",
+                        "type": "BOOLEAN"
+                      }
+                    ],
+                    "mode": "REPEATED",
+                    "name": "coding",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "text",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "type",
+                "type": "RECORD"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "start",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "end",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "period",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "organizationId",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "reference",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "assigner",
+                "type": "RECORD"
+              }
+            ],
+            "name": "identifier",
+            "type": "RECORD"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          }
+        ],
+        "name": "assigner",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "identifier",
+    "type": "RECORD"
+  },
+  {
+    "name": "implicitRules",
+    "type": "STRING"
+  },
+  {
+    "name": "language",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "practitionerId",
+                "type": "STRING"
+              },
+              {
+                "name": "patientId",
+                "type": "STRING"
+              },
+              {
+                "name": "relatedPersonId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "use",
+                            "type": "STRING"
+                          },
+                          {
+                            "fields": [
+                              {
+                                "fields": [
+                                  {
+                                    "name": "system",
+                                    "type": "STRING"
+                                  },
+                                  {
+                                    "name": "version",
+                                    "type": "STRING"
+                                  },
+                                  {
+                                    "name": "code",
+                                    "type": "STRING"
+                                  },
+                                  {
+                                    "name": "display",
+                                    "type": "STRING"
+                                  },
+                                  {
+                                    "name": "userSelected",
+                                    "type": "BOOLEAN"
+                                  }
+                                ],
+                                "mode": "REPEATED",
+                                "name": "coding",
+                                "type": "RECORD"
+                              },
+                              {
+                                "name": "text",
+                                "type": "STRING"
+                              }
+                            ],
+                            "name": "type",
+                            "type": "RECORD"
+                          },
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "value",
+                            "type": "STRING"
+                          },
+                          {
+                            "fields": [
+                              {
+                                "name": "start",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "end",
+                                "type": "STRING"
+                              }
+                            ],
+                            "name": "period",
+                            "type": "RECORD"
+                          },
+                          {
+                            "fields": [
+                              {
+                                "name": "organizationId",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "reference",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "display",
+                                "type": "STRING"
+                              }
+                            ],
+                            "name": "assigner",
+                            "type": "RECORD"
+                          }
+                        ],
+                        "name": "identifier",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "reference",
+            "type": "RECORD"
+          },
+          {
+            "name": "string",
+            "type": "STRING"
+          }
+        ],
+        "name": "author",
+        "type": "RECORD"
+      },
+      {
+        "name": "time",
+        "type": "STRING"
+      },
+      {
+        "name": "text",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "note",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "medicationRequestId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "name": "priorPrescription",
+    "type": "RECORD"
+  },
+  {
+    "name": "priority",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "version",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          },
+          {
+            "name": "userSelected",
+            "type": "BOOLEAN"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "coding",
+        "type": "RECORD"
+      },
+      {
+        "name": "text",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "reasonCode",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "practitionerId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "name": "recorder",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "allowed",
+        "type": "BOOLEAN"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "reason",
+        "type": "RECORD"
+      }
+    ],
+    "name": "substitution",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "resourceId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "display",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "supportingInformation",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "status",
+        "type": "STRING"
+      },
+      {
+        "name": "div",
+        "type": "STRING"
+      }
+    ],
+    "name": "text",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "code",
+                "type": "STRING"
+              }
+            ],
+            "name": "value",
+            "type": "RECORD"
+          }
+        ],
+        "name": "shr_action_RequestIntent_extension",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "code",
+                "type": "STRING"
+              }
+            ],
+            "name": "value",
+            "type": "RECORD"
+          }
+        ],
+        "name": "shr_action_Status_extension",
+        "type": "RECORD"
+      }
+    ],
+    "name": "shr_action_RequestedContext_extension",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "codeableConcept",
+            "type": "RECORD"
+          }
+        ],
+        "name": "value",
+        "type": "RECORD"
+      }
+    ],
+    "name": "shr_base_ActionCode_extension",
+    "type": "RECORD"
+  },
+  {
+    "name": "authoredOn",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "name": "display",
+        "type": "STRING"
+      },
+      {
+        "name": "episodeOfCareId",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "name": "encounterId",
+        "type": "STRING"
+      }
+    ],
+    "name": "context",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "value",
+            "type": "FLOAT"
+          },
+          {
+            "name": "unit",
+            "type": "STRING"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          }
+        ],
+        "name": "maxDosePerAdministration",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "value",
+            "type": "FLOAT"
+          },
+          {
+            "name": "unit",
+            "type": "STRING"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          }
+        ],
+        "name": "maxDosePerLifetime",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "value",
+                "type": "FLOAT"
+              },
+              {
+                "name": "comparator",
+                "type": "STRING"
+              },
+              {
+                "name": "unit",
+                "type": "STRING"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              }
+            ],
+            "name": "numerator",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "value",
+                "type": "FLOAT"
+              },
+              {
+                "name": "comparator",
+                "type": "STRING"
+              },
+              {
+                "name": "unit",
+                "type": "STRING"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              }
+            ],
+            "name": "denominator",
+            "type": "RECORD"
+          }
+        ],
+        "name": "maxDosePerPeriod",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "method",
+        "type": "RECORD"
+      },
+      {
+        "name": "patientInstruction",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "value",
+                    "type": "FLOAT"
+                  },
+                  {
+                    "name": "comparator",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "unit",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "numerator",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "value",
+                    "type": "FLOAT"
+                  },
+                  {
+                    "name": "comparator",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "unit",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "denominator",
+                "type": "RECORD"
+              }
+            ],
+            "name": "ratio",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "value",
+                    "type": "FLOAT"
+                  },
+                  {
+                    "name": "unit",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "low",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "value",
+                    "type": "FLOAT"
+                  },
+                  {
+                    "name": "unit",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "high",
+                "type": "RECORD"
+              }
+            ],
+            "name": "range",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "value",
+                "type": "FLOAT"
+              },
+              {
+                "name": "unit",
+                "type": "STRING"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              }
+            ],
+            "name": "quantity",
+            "type": "RECORD"
+          }
+        ],
+        "name": "rate",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "route",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "site",
+        "type": "RECORD"
+      },
+      {
+        "name": "text",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "additionalInstruction",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "codeableConcept",
+            "type": "RECORD"
+          },
+          {
+            "name": "boolean",
+            "type": "BOOLEAN"
+          }
+        ],
+        "name": "asNeeded",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "value",
+                    "type": "FLOAT"
+                  },
+                  {
+                    "name": "unit",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "low",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "value",
+                    "type": "FLOAT"
+                  },
+                  {
+                    "name": "unit",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "high",
+                "type": "RECORD"
+              }
+            ],
+            "name": "range",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "unit",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "FLOAT"
+              }
+            ],
+            "name": "quantity",
+            "type": "RECORD"
+          }
+        ],
+        "name": "dose",
+        "type": "RECORD"
+      },
+      {
+        "name": "sequence",
+        "type": "INTEGER"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "code",
+            "type": "RECORD"
+          },
+          {
+            "mode": "REPEATED",
+            "name": "event",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "value",
+                        "type": "FLOAT"
+                      },
+                      {
+                        "name": "comparator",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "unit",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "duration",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "value",
+                            "type": "FLOAT"
+                          },
+                          {
+                            "name": "unit",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "low",
+                        "type": "RECORD"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "value",
+                            "type": "FLOAT"
+                          },
+                          {
+                            "name": "unit",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "high",
+                        "type": "RECORD"
+                      }
+                    ],
+                    "name": "range",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "bounds",
+                "type": "RECORD"
+              },
+              {
+                "name": "count",
+                "type": "INTEGER"
+              },
+              {
+                "name": "countMax",
+                "type": "INTEGER"
+              },
+              {
+                "mode": "REPEATED",
+                "name": "dayOfWeek",
+                "type": "STRING"
+              },
+              {
+                "name": "duration",
+                "type": "FLOAT"
+              },
+              {
+                "name": "durationMax",
+                "type": "FLOAT"
+              },
+              {
+                "name": "durationUnit",
+                "type": "STRING"
+              },
+              {
+                "name": "frequencyMax",
+                "type": "INTEGER"
+              },
+              {
+                "name": "offset",
+                "type": "INTEGER"
+              },
+              {
+                "name": "periodMax",
+                "type": "FLOAT"
+              },
+              {
+                "mode": "REPEATED",
+                "name": "timeOfDay",
+                "type": "STRING"
+              },
+              {
+                "mode": "REPEATED",
+                "name": "when",
+                "type": "STRING"
+              },
+              {
+                "name": "frequency",
+                "type": "INTEGER"
+              },
+              {
+                "name": "period",
+                "type": "FLOAT"
+              },
+              {
+                "name": "periodUnit",
+                "type": "STRING"
+              }
+            ],
+            "name": "repeat",
+            "type": "RECORD"
+          }
+        ],
+        "name": "timing",
+        "type": "RECORD"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "dosageInstruction",
+    "type": "RECORD"
+  },
+  {
+    "name": "id",
+    "type": "STRING"
+  },
+  {
+    "name": "intent",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "medicationId",
+            "type": "STRING"
+          },
+          {
+            "name": "reference",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "use",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "version",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "userSelected",
+                        "type": "BOOLEAN"
+                      }
+                    ],
+                    "mode": "REPEATED",
+                    "name": "coding",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "text",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "type",
+                "type": "RECORD"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "start",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "end",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "period",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "organizationId",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "reference",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "use",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "fields": [
+                              {
+                                "name": "system",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "version",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "code",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "display",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "userSelected",
+                                "type": "BOOLEAN"
+                              }
+                            ],
+                            "mode": "REPEATED",
+                            "name": "coding",
+                            "type": "RECORD"
+                          },
+                          {
+                            "name": "text",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "type",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "value",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "start",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "end",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "period",
+                        "type": "RECORD"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "organizationId",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "reference",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "assigner",
+                        "type": "RECORD"
+                      }
+                    ],
+                    "name": "identifier",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "assigner",
+                "type": "RECORD"
+              }
+            ],
+            "name": "identifier",
+            "type": "RECORD"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          }
+        ],
+        "name": "reference",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "fields": [
+              {
+                "name": "userSelected",
+                "type": "BOOLEAN"
+              },
+              {
+                "name": "version",
+                "type": "STRING"
+              },
+              {
+                "name": "code",
+                "type": "STRING"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              }
+            ],
+            "mode": "REPEATED",
+            "name": "coding",
+            "type": "RECORD"
+          },
+          {
+            "name": "text",
+            "type": "STRING"
+          }
+        ],
+        "name": "codeableConcept",
+        "type": "RECORD"
+      }
+    ],
+    "name": "medication",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "lastUpdated",
+        "type": "TIMESTAMP"
+      },
+      {
+        "fields": [
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "version",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          },
+          {
+            "name": "userSelected",
+            "type": "BOOLEAN"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "security",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "version",
+            "type": "STRING"
+          },
+          {
+            "name": "code",
+            "type": "STRING"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          },
+          {
+            "name": "userSelected",
+            "type": "BOOLEAN"
+          }
+        ],
+        "mode": "REPEATED",
+        "name": "tag",
+        "type": "RECORD"
+      },
+      {
+        "name": "versionId",
+        "type": "STRING"
+      },
+      {
+        "mode": "REPEATED",
+        "name": "profile",
+        "type": "STRING"
+      }
+    ],
+    "name": "meta",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "name": "display",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "observationId",
+        "type": "STRING"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "name": "conditionId",
+        "type": "STRING"
+      }
+    ],
+    "mode": "REPEATED",
+    "name": "reasonReference",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+      {
+        "fields": [
+          {
+            "name": "deviceId",
+            "type": "STRING"
+          },
+          {
+            "name": "display",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "use",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "version",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "userSelected",
+                        "type": "BOOLEAN"
+                      }
+                    ],
+                    "mode": "REPEATED",
+                    "name": "coding",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "text",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "type",
+                "type": "RECORD"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "start",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "end",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "period",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "organizationId",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "reference",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "use",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "fields": [
+                              {
+                                "name": "system",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "version",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "code",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "display",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "userSelected",
+                                "type": "BOOLEAN"
+                              }
+                            ],
+                            "mode": "REPEATED",
+                            "name": "coding",
+                            "type": "RECORD"
+                          },
+                          {
+                            "name": "text",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "type",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "value",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "start",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "end",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "period",
+                        "type": "RECORD"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "organizationId",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "reference",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "assigner",
+                        "type": "RECORD"
+                      }
+                    ],
+                    "name": "identifier",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "assigner",
+                "type": "RECORD"
+              }
+            ],
+            "name": "identifier",
+            "type": "RECORD"
+          },
+          {
+            "name": "organizationId",
+            "type": "STRING"
+          },
+          {
+            "name": "patientId",
+            "type": "STRING"
+          },
+          {
+            "name": "reference",
+            "type": "STRING"
+          },
+          {
+            "name": "relatedPersonId",
+            "type": "STRING"
+          },
+          {
+            "name": "practitionerId",
+            "type": "STRING"
+          }
+        ],
+        "name": "agent",
+        "type": "RECORD"
+      },
+      {
+        "fields": [
+          {
+            "name": "display",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "use",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "fields": [
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "version",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "code",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "userSelected",
+                        "type": "BOOLEAN"
+                      }
+                    ],
+                    "mode": "REPEATED",
+                    "name": "coding",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "text",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "type",
+                "type": "RECORD"
+              },
+              {
+                "name": "system",
+                "type": "STRING"
+              },
+              {
+                "name": "value",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "start",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "end",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "period",
+                "type": "RECORD"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "organizationId",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "reference",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "use",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "fields": [
+                              {
+                                "name": "system",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "version",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "code",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "display",
+                                "type": "STRING"
+                              },
+                              {
+                                "name": "userSelected",
+                                "type": "BOOLEAN"
+                              }
+                            ],
+                            "mode": "REPEATED",
+                            "name": "coding",
+                            "type": "RECORD"
+                          },
+                          {
+                            "name": "text",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "type",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "system",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "value",
+                        "type": "STRING"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "start",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "end",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "period",
+                        "type": "RECORD"
+                      },
+                      {
+                        "fields": [
+                          {
+                            "name": "organizationId",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "reference",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          }
+                        ],
+                        "name": "assigner",
+                        "type": "RECORD"
+                      }
+                    ],
+                    "name": "identifier",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  }
+                ],
+                "name": "assigner",
+                "type": "RECORD"
+              }
+            ],
+            "name": "identifier",
+            "type": "RECORD"
+          },
+          {
+            "name": "reference",
+            "type": "STRING"
+          },
+          {
+            "name": "organizationId",
+            "type": "STRING"
+          }
+        ],
+        "name": "onBehalfOf",
+        "type": "RECORD"
+      }
+    ],
+    "name": "requester",
+    "type": "RECORD"
+  },
+  {
+    "name": "status",
+    "type": "STRING"
+  },
+  {
+    "fields": [
+      {
+        "name": "display",
+        "type": "STRING"
+      },
+      {
+        "name": "groupId",
+        "type": "STRING"
+      },
+      {
+        "fields": [
+          {
+            "name": "use",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "fields": [
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "version",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "code",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "display",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "userSelected",
+                    "type": "BOOLEAN"
+                  }
+                ],
+                "mode": "REPEATED",
+                "name": "coding",
+                "type": "RECORD"
+              },
+              {
+                "name": "text",
+                "type": "STRING"
+              }
+            ],
+            "name": "type",
+            "type": "RECORD"
+          },
+          {
+            "name": "system",
+            "type": "STRING"
+          },
+          {
+            "name": "value",
+            "type": "STRING"
+          },
+          {
+            "fields": [
+              {
+                "name": "start",
+                "type": "STRING"
+              },
+              {
+                "name": "end",
+                "type": "STRING"
+              }
+            ],
+            "name": "period",
+            "type": "RECORD"
+          },
+          {
+            "fields": [
+              {
+                "name": "organizationId",
+                "type": "STRING"
+              },
+              {
+                "name": "reference",
+                "type": "STRING"
+              },
+              {
+                "fields": [
+                  {
+                    "name": "use",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "fields": [
+                          {
+                            "name": "system",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "version",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "code",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "display",
+                            "type": "STRING"
+                          },
+                          {
+                            "name": "userSelected",
+                            "type": "BOOLEAN"
+                          }
+                        ],
+                        "mode": "REPEATED",
+                        "name": "coding",
+                        "type": "RECORD"
+                      },
+                      {
+                        "name": "text",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "type",
+                    "type": "RECORD"
+                  },
+                  {
+                    "name": "system",
+                    "type": "STRING"
+                  },
+                  {
+                    "name": "value",
+                    "type": "STRING"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "start",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "end",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "period",
+                    "type": "RECORD"
+                  },
+                  {
+                    "fields": [
+                      {
+                        "name": "organizationId",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "reference",
+                        "type": "STRING"
+                      },
+                      {
+                        "name": "display",
+                        "type": "STRING"
+                      }
+                    ],
+                    "name": "assigner",
+                    "type": "RECORD"
+                  }
+                ],
+                "name": "identifier",
+                "type": "RECORD"
+              },
+              {
+                "name": "display",
+                "type": "STRING"
+              }
+            ],
+            "name": "assigner",
+            "type": "RECORD"
+          }
+        ],
+        "name": "identifier",
+        "type": "RECORD"
+      },
+      {
+        "name": "reference",
+        "type": "STRING"
+      },
+      {
+        "name": "patientId",
+        "type": "STRING"
+      }
+    ],
+    "name": "subject",
+    "type": "RECORD"
+  }
+]
