@@ -162,6 +162,7 @@ export function initializeSummaryTab() {
 
 async function loadDoctorSummary() {
     toggleLoadingSpinner(true);
+    
     try {
         const response = await callCloudFunction('doctorSummaryAndQA', { 
             action: 'summary',

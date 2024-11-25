@@ -351,6 +351,7 @@ export function downloadPatientRecord() {
 async function handleQASubmit() {
     const qaInput = document.getElementById('qaInput');
     const question = qaInput.value.trim();
+
     if (!question) return;
 
     const qaChat = document.getElementById('qaChat');
@@ -376,6 +377,11 @@ async function handleQASubmit() {
 async function handleGenerateRecommendations() {
     toggleLoadingSpinner(true);
     const recommendationsContent = document.getElementById('recommendationsContent');
+
+    if (recommendationsContent.innerHTML.trim() === '') {
+        recommendationsContent.innerHTML = '<p><strong>Loading...</strong></p>';
+    }
+
     try {
       const response = await callCloudFunction('generateRecommendations', { patientRecord: state.currentRecord });
       const { recommendations, documents } = response;
