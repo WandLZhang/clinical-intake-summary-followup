@@ -193,13 +193,7 @@ export async function handleImageUpload(event) {
 
     try {
         // Upload image and process medication info
-        const formData = new FormData();
-        formData.append('image', file);
-        const response = await uploadMedicationImage(formData);
-        
-        // Add image preview to chat
-        const imageMessage = `<img src="${URL.createObjectURL(file)}" alt="Medication Image" class="chat-image">`;
-        addMessageToChat('user', imageMessage);
+        const response = await uploadMedicationImage(file);
         
         if (response.medicationInfo && response.medicationInfo.length > 0) {
             // Format extracted medication information
@@ -207,26 +201,15 @@ export async function handleImageUpload(event) {
                 `${med.name} (${med.dosage})`
             ).join(', ');
             
-            const confirmationMessage = `I've detected the following medications: ${medicationList}. Is this correct?`;
-            addMessageToChat('bot', confirmationMessage);
-            
             // Populate chat input with extracted info for user confirmation
             const chatInput = document.getElementById('chatInput');
             chatInput.value = `Medications: ${medicationList}`;
             autoResizeTextArea(chatInput);
+            
+            addMessageToChat('bot', "I've detected some medications from the image. Please review the information in the chat input, make any necessary corrections, and send the message when you're ready.");
         } else {
-            addMessageToChat('bot', "I couldn't detect any medications in the image. Could you please list your medications and dosages?");
+            addMessageToChat('bot', "I couldn't detect any medications in the image. Could you please type your medications and dosages in the chat input?");
         }
-        
-        // Update current record if provided
-        if (response.updated_record) {
-            updateState({ currentRecord: { ...state.currentRecord, ...response.updated_record } });
-            updateProgressItems(); 
-        }
-
-        // Update tooltips
-        updateProgressItems();
-
     } catch (error) {
         console.error('Error processing image:', error);
         addMessageToChat('bot', 'Sorry, there was an error processing your image. Could you please type out your medications and dosages?');
