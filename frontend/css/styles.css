@@ -461,3 +461,11 @@ body {
   .follow-up-letter li {
     margin-bottom: 0.5rem;
   }
+
+  .patient-lookup {
+    margin-top: 1rem;
+}
+
+.patient-lookup input {
+    margin-bottom: 0.5rem;
+}

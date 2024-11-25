@@ -48,6 +48,8 @@ export function setupEventListeners() {
     });
     document.getElementById('generateRecommendations').addEventListener('click', handleGenerateRecommendations);
 
+    //Patient look up
+    document.getElementById('patientLookupBtn').addEventListener('click', handlePatientLookup);
 }
 
 export async function handleMessageSend() {
@@ -423,3 +425,58 @@ async function handleGenerateRecommendations() {
     }
     toggleLoadingSpinner(false);
   }
+
+  export async function handlePatientLookup() {
+    const patientId = document.getElementById('patientIdInput').value.trim();
+    if (!patientId) {
+        alert('Please enter a valid Patient ID');
+        return;
+    }
+
+    try {
+        toggleLoadingSpinner(true);
+        const medications = await callCloudFunction('queryPatientMedications', { patientId });
+        if (medications) {
+            const message = `Patient ${patientId} is taking the following medications: ${medications}`;
+            await handleMessageSend(message);
+        } else {
+            alert('No medications found for this patient');
+        }
+    } catch (error) {
+        console.error('Error looking up patient medications:', error);
+        alert('Error looking up patient medications. Please try again.');
+    } finally {
+        toggleLoadingSpinner(false);
+    }
+}
+
+export async function handlePatientLookup() {
+    const patientId = document.getElementById('patientIdInput').value.trim();
+    if (!patientId) {
+        alert('Please enter a valid Patient ID');
+        return;
+    }
+
+    try {
+        toggleLoadingSpinner(true);
+        const response = await callCloudFunction('queryPatientMedications', { patientId });
+        
+        if (response && response.medications) {
+            const message = `Patient ${patientId} is taking the following medications: ${response.medications}`;
+            
+            // Simulate user input by setting the chat input value
+            const chatInput = document.getElementById('chatInput');
+            chatInput.value = message;
+            
+            // Trigger the handleMessageSend function
+            handleMessageSend();
+        } else {
+            alert('No medications found for this patient');
+        }
+    } catch (error) {
+        console.error('Error looking up patient medications:', error);
+        alert('Error looking up patient medications. Please try again.');
+    } finally {
+        toggleLoadingSpinner(false);
+    }
+}
