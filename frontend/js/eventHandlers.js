@@ -427,6 +427,7 @@ async function handleGenerateRecommendations() {
   }
 
   export async function handlePatientLookup() {
+    console.log('handlePatientLookup called'); // Debug log
     const patientId = document.getElementById('patientIdInput').value.trim();
     if (!patientId) {
         alert('Please enter a valid Patient ID');
@@ -434,43 +435,26 @@ async function handleGenerateRecommendations() {
     }
 
     try {
-        toggleLoadingSpinner(true);
-        const medications = await callCloudFunction('queryPatientMedications', { patientId });
-        if (medications) {
-            const message = `Patient ${patientId} is taking the following medications: ${medications}`;
-            await handleMessageSend(message);
-        } else {
-            alert('No medications found for this patient');
-        }
-    } catch (error) {
-        console.error('Error looking up patient medications:', error);
-        alert('Error looking up patient medications. Please try again.');
-    } finally {
-        toggleLoadingSpinner(false);
-    }
-}
-
-export async function handlePatientLookup() {
-    const patientId = document.getElementById('patientIdInput').value.trim();
-    if (!patientId) {
-        alert('Please enter a valid Patient ID');
-        return;
-    }
-
-    try {
+        console.log('Calling queryPatientMedications with patientId:', patientId); // Debug log
         toggleLoadingSpinner(true);
         const response = await callCloudFunction('queryPatientMedications', { patientId });
+        console.log('Response from queryPatientMedications:', response); // Debug log
         
         if (response && response.medications) {
             const message = `Patient ${patientId} is taking the following medications: ${response.medications}`;
+            console.log('Setting chat input with message:', message); // Debug log
             
-            // Simulate user input by setting the chat input value
+            // Set the chat input value
             const chatInput = document.getElementById('chatInput');
             chatInput.value = message;
             
-            // Trigger the handleMessageSend function
-            handleMessageSend();
+            // Focus on the chat input
+            chatInput.focus();
+            
+            // Optionally, you can add a bot message to prompt the user to review and send the information
+            addMessageToChat('bot', 'I\'ve retrieved the patient\'s medication information. Please review it in the chat input, make any necessary changes, and send the message when you\'re ready.');
         } else {
+            console.log('No medications found for patient:', patientId); // Debug log
             alert('No medications found for this patient');
         }
     } catch (error) {
@@ -480,3 +464,4 @@ export async function handlePatientLookup() {
         toggleLoadingSpinner(false);
     }
 }
+
