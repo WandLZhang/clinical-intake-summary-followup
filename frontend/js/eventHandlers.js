@@ -377,11 +377,55 @@ async function handleGenerateRecommendations() {
     toggleLoadingSpinner(true);
     const recommendationsContent = document.getElementById('recommendationsContent');
     try {
-        const response = await callCloudFunction('generateRecommendations', { currentRecord: state.currentRecord });
-        recommendationsContent.innerHTML = response.recommendations;
+      const response = await callCloudFunction('generateRecommendations', { patientRecord: state.currentRecord });
+      const { recommendations, documents } = response;
+      
+      // Display retrieved documents
+      const documentsHtml = documents.map((doc, index) => `
+        <div class="mb-4 p-4 bg-gray-100 rounded">
+          <h4 class="font-semibold text-lg">${doc.title}</h4>
+          <p class="abstract-content">${doc.content.substring(0, 200)}...</p>
+          <button class="read-more-btn text-blue-500 hover:text-blue-700" data-index="${index}">Read more</button>
+          <div class="full-abstract hidden">${doc.content}</div>
+        </div>
+      `).join('');
+      
+      recommendationsContent.innerHTML = `
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold mb-2">Retrieved Documents</h3>
+          ${documentsHtml}
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">Recommendations</h3>
+          <div id="markdown-content"></div>
+        </div>
+      `;
+  
+      // Render markdown content
+      document.getElementById('markdown-content').innerHTML = marked.parse(recommendations);
+  
+      // Add event listeners for "Read more" buttons
+      document.querySelectorAll('.read-more-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const index = this.getAttribute('data-index');
+          const abstractContent = this.previousElementSibling;
+          const fullAbstract = this.nextElementSibling;
+          
+          if (this.textContent === 'Read more') {
+            abstractContent.classList.add('hidden');
+            fullAbstract.classList.remove('hidden');
+            this.textContent = 'Read less';
+          } else {
+            abstractContent.classList.remove('hidden');
+            fullAbstract.classList.add('hidden');
+            this.textContent = 'Read more';
+          }
+        });
+      });
+  
     } catch (error) {
-        console.error('Error generating recommendations:', error);
-        recommendationsContent.innerHTML = 'Error generating recommendations. Please try again.';
+      console.error('Error generating recommendations:', error);
+      recommendationsContent.innerHTML = 'Error generating recommendations. Please try again.';
     }
     toggleLoadingSpinner(false);
-}
+  }

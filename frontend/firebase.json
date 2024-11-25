@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "gemini-med-lit-review-fd340",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

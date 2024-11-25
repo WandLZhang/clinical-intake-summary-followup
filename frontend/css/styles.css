@@ -372,3 +372,74 @@ body {
     max-width: 300px;
     border-radius: 0.375rem;
 }
+
+/* Add these styles at the end of the file */
+#recommendationsContent {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  
+  #recommendationsContent h3 {
+    color: #2563eb;
+    margin-top: 1rem;
+  }
+  
+  #recommendationsContent table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  #recommendationsContent th, #recommendationsContent td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  #recommendationsContent th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+  }
+
+  .abstract-content, .full-abstract {
+    margin-bottom: 0.5rem;
+  }
+  
+  .read-more-btn {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  #markdown-content h1, #markdown-content h2, #markdown-content h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  #markdown-content h1 { font-size: 1.5rem; }
+  #markdown-content h2 { font-size: 1.3rem; }
+  #markdown-content h3 { font-size: 1.1rem; }
+  
+  #markdown-content ul, #markdown-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  #markdown-content li {
+    margin-bottom: 0.25rem;
+  }
+  
+  #markdown-content table {
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  #markdown-content th, #markdown-content td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem;
+  }
+  
+  #markdown-content th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+  }

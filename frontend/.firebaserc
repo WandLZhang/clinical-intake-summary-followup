@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "gemini-med-lit-review"
+  },
+  "targets": {
+    "gemini-med-lit-review": {
+      "hosting": {
+        "diabetes-intake": [
+          "1:934163632848:web:6086e05efe865fd82e44d5"
+        ]
+      }
+    }
+  }
+}
