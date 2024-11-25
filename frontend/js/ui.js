@@ -142,11 +142,15 @@ async function loadFollowUpContent() {
       const response = await callCloudFunction('generateFollowUp', { patientRecord: state.currentRecord });
       let letterContent = response.letter;
       
+        // Simple fix to remove ```html tags
+        letterContent = letterContent.replace(/```html|```/g, '').trim();
+
       // Remove wrapping HTML tags if present
       letterContent = letterContent.replace(/^'''html\s*/, '').replace(/'''\s*$/, '');
       
-      // Create a new div to hold the letter content
+      // Create a new div to hold the letter content with proper styling
       const letterDiv = document.createElement('div');
+      letterDiv.className = 'bg-white rounded-lg shadow-md p-6 mb-6';
       letterDiv.innerHTML = letterContent;
       
       followupTab.appendChild(letterDiv);

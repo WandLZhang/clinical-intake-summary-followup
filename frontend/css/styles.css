@@ -444,4 +444,20 @@ body {
     font-weight: 600;
   }
 
+  .follow-up-letter h1 {
+    color: #2563eb;
+    margin-bottom: 1rem;
+  }
   
+  .follow-up-letter p {
+    margin-bottom: 1rem;
+  }
+  
+  .follow-up-letter ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .follow-up-letter li {
+    margin-bottom: 0.5rem;
+  }
