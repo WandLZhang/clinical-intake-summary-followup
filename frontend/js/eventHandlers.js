@@ -195,28 +195,27 @@ export async function handleImageUpload(event) {
         // Upload image and process medication info
         const response = await uploadMedicationImage(file);
         
-        if (response.medicationInfo && response.medicationInfo.length > 0) {
-            // Format extracted medication information
-            const medicationList = response.medicationInfo.map(med => 
-                `${med.name} (${med.dosage})`
-            ).join(', ');
-            
-            // Populate chat input with extracted info for user confirmation
+        if (response.medicationInfo) {
+            // Add the raw medication information to the chat input
             const chatInput = document.getElementById('chatInput');
-            chatInput.value = `Medications: ${medicationList}`;
+            chatInput.value += (chatInput.value ? '\n\n' : '') + response.medicationInfo;
             autoResizeTextArea(chatInput);
             
-            addMessageToChat('bot', "I've detected some medications from the image. Please review the information in the chat input, make any necessary corrections, and send the message when you're ready.");
+            addMessageToChat('bot', "I've extracted medication information from the image. Please review the information in the chat input, make any necessary corrections, and send the message when you're ready.");
         } else {
-            addMessageToChat('bot', "I couldn't detect any medications in the image. Could you please type your medications and dosages in the chat input?");
+            addMessageToChat('bot', "I couldn't extract any medication information from the image. Could you please type your medications and dosages in the chat input?");
         }
     } catch (error) {
         console.error('Error processing image:', error);
         addMessageToChat('bot', 'Sorry, there was an error processing your image. Could you please type out your medications and dosages?');
     }
+    
+    // Reset the file input to allow uploading the same file again
+    event.target.value = '';
 
     toggleLoadingSpinner(false);
 }
+
 
 export async function generateDemoAnswers() {
     toggleLoadingSpinner(true);
