@@ -168,10 +168,10 @@ async function loadDoctorSummary() {
             action: 'summary',
             currentRecord: state.currentRecord 
         });
-        document.getElementById('doctorSummaryContent').innerHTML = response.summary;
+        document.getElementById('record-summary-content').innerHTML = marked.parse(response.summary);
     } catch (error) {
         console.error('Error loading doctor summary:', error);
-        document.getElementById('doctorSummaryContent').innerHTML = 'Error loading summary. Please try again.';
+        document.getElementById('record-summary-content').innerHTML = 'Error loading summary. Please try again.';
     }
     toggleLoadingSpinner(false);
 }

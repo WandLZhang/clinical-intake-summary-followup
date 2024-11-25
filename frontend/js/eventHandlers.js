@@ -354,8 +354,8 @@ async function handleQASubmit() {
 
     if (!question) return;
 
-    const qaChat = document.getElementById('qaChat');
-    qaChat.innerHTML += `<p><strong>Q:</strong> ${sanitizeString(question)}</p>`;
+    const qaContent = document.getElementById('qa-content');
+    qaContent.innerHTML += marked.parse(`**Q:** ${sanitizeString(question)}\n\n`);
     qaInput.value = '';
 
     toggleLoadingSpinner(true);
@@ -365,13 +365,13 @@ async function handleQASubmit() {
             question: question,
             currentRecord: state.currentRecord 
         });
-        qaChat.innerHTML += `<p><strong>A:</strong> ${sanitizeString(response.answer)}</p>`;
+        qaContent.innerHTML += marked.parse(`**A:** ${sanitizeString(response.answer)}\n\n`);
     } catch (error) {
         console.error('Error getting answer:', error);
-        qaChat.innerHTML += `<p><strong>A:</strong> Sorry, there was an error processing your question. Please try again.</p>`;
+        qaContent.innerHTML += marked.parse(`**A:** Sorry, there was an error processing your question. Please try again.\n\n`);
     }
     toggleLoadingSpinner(false);
-    qaChat.scrollTop = qaChat.scrollHeight;
+    qaContent.scrollTop = qaContent.scrollHeight;
 }
 
 async function handleGenerateRecommendations() {
