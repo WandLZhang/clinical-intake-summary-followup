@@ -135,18 +135,28 @@ export async function handleTabChange(tabName) {
 }
 
 async function loadFollowUpContent() {
+    const followupTab = document.getElementById('followupTab');
+    followupTab.innerHTML = ''; // Clear existing content
     toggleLoadingSpinner(true);
-
     try {
-        const followup = await callCloudFunction('generateFollowUp');
-        const followupTab = document.getElementById('followupTab');
-        followupTab.innerHTML = followup.html;
+      const response = await callCloudFunction('generateFollowUp', { patientRecord: state.currentRecord });
+      let letterContent = response.letter;
+      
+      // Remove wrapping HTML tags if present
+      letterContent = letterContent.replace(/^'''html\s*/, '').replace(/'''\s*$/, '');
+      
+      // Create a new div to hold the letter content
+      const letterDiv = document.createElement('div');
+      letterDiv.innerHTML = letterContent;
+      
+      followupTab.appendChild(letterDiv);
     } catch (error) {
-        console.error('Error loading follow-up content:', error);
+      console.error('Error loading follow-up content:', error);
+      followupTab.textContent = 'Error generating follow-up letter. Please try again.';
+    } finally {
+      toggleLoadingSpinner(false);
     }
-
-    toggleLoadingSpinner(false);
-}
+  }
 
 export function initializeSummaryTab() {
     const qaSubmitBtn = document.getElementById('qaSubmit');
