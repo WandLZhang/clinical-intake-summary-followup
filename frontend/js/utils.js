@@ -78,8 +78,8 @@ export function getTooltipContent(category, subcategory) {
             }
             return 'Diet information not provided';
         case 'lifestyle-activity':
-            if (record.activity && record.activity.frequency) {
-                return `Exercise frequency: ${record.activity.frequency}`;
+            if (record.activity && record.activity.exercise_frequency) {
+                return `Exercise frequency: ${record.activity.exercise_frequency}`;
             }
             return 'Physical activity information not provided';
         case 'lifestyle-mental':
