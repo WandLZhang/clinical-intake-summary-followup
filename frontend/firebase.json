@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "gemini-med-lit-review-fd340",
+    "site": "diabetes-intake-assistant",
     "public": ".",
     "ignore": [
       "firebase.json",
