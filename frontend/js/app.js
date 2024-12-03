@@ -7,4 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeUI();
     setupEventListeners();
     updateProgressItems();
+    
+    // Show welcome popup
+    const welcomePopup = document.getElementById('welcomePopup');
+    const closePopupBtn = document.getElementById('closePopup');
+    
+    closePopupBtn.addEventListener('click', () => {
+        welcomePopup.classList.add('hidden');
+    });
 });
