@@ -4,16 +4,23 @@ from flask_cors import CORS
 import json
 import logging
 import traceback
-import vertexai
-from vertexai.generative_models import GenerativeModel, Part, SafetySetting
+from google import genai
+from google.genai import types
+import os
 from typing import Dict, Any, List, Optional, Tuple
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize Vertex AI
-vertexai.init(project="gemini-med-lit-review", location="us-central1")
+# Initialize Gemini client
+client = genai.Client(
+    vertexai=True,
+    project="gemini-med-lit-review",
+    location="us-central1",
+)
+
+model = "gemini-2.5-pro"
 
 # Define the record schema
 RECORD_SCHEMA: Dict[str, Any] = {
@@ -198,40 +205,43 @@ def merge_user_input(current_record: Dict[str, Any], user_input: Dict[str, Any])
     return deep_update(current_record, user_input)
 
 def generate_content(prompt: str) -> str:
-    """Generate content using Gemini Flash."""
-    model = GenerativeModel("gemini-1.5-flash-002")
-    
-    generation_config = {
-        "max_output_tokens": 8192,
-        "temperature": 0.1,  # Lower temperature for more consistent responses
-        "top_p": 0.95,
-    }
-
-    safety_settings = [
-        SafetySetting(
-            category=SafetySetting.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-            threshold=SafetySetting.HarmBlockThreshold.OFF
-        ),
-        SafetySetting(
-            category=SafetySetting.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-            threshold=SafetySetting.HarmBlockThreshold.OFF
-        ),
-        SafetySetting(
-            category=SafetySetting.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-            threshold=SafetySetting.HarmBlockThreshold.OFF
-        ),
-        SafetySetting(
-            category=SafetySetting.HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold=SafetySetting.HarmBlockThreshold.OFF
-        ),
-    ]
+    """Generate content using Gemini."""
+    generate_content_config = types.GenerateContentConfig(
+        temperature=0.1,  # Lower temperature for more consistent responses
+        top_p=0.95,
+        max_output_tokens=8192,
+        safety_settings=[
+            types.SafetySetting(
+                category="HARM_CATEGORY_HATE_SPEECH",
+                threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_DANGEROUS_CONTENT",
+                threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_HARASSMENT",
+                threshold="OFF"
+            )
+        ],
+    )
 
     try:
-        response = model.generate_content(
-            prompt,
-            generation_config=generation_config,
-            safety_settings=safety_settings,
-            stream=False
+        contents = [
+            types.Content(
+                role="user",
+                parts=[types.Part(text=prompt)]
+            )
+        ]
+        
+        response = client.models.generate_content(
+            model=model,
+            contents=contents,
+            config=generate_content_config,
         )
         
         if response.text:

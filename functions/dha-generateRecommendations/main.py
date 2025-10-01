@@ -1,8 +1,8 @@
 import os
-import vertexai
+from google import genai
+from google.genai import types
 from langchain.memory import ConversationBufferMemory
 from langchain.callbacks.base import BaseCallbackHandler
-from langchain_google_vertexai import ChatVertexAI, HarmBlockThreshold, HarmCategory, VertexAI
 from langchain_google_vertexai import VertexAIEmbeddings
 from langchain_google_vertexai import VectorSearchVectorStore
 from langchain_google_vertexai.vectorstores.vectorstores import _BaseVertexAIVectorStore
@@ -20,8 +20,14 @@ import functions_framework
 from flask import jsonify, request
 from flask_cors import CORS
 
-# Initialize Vertex AI
-vertexai.init(project="gemini-med-lit-review")
+# Initialize Gemini client
+client = genai.Client(
+    vertexai=True,
+    project="gemini-med-lit-review",
+    location="us-central1",
+)
+
+model = "gemini-2.5-pro"
 
 class VectorSearchVectorStorePostgres(_BaseVertexAIVectorStore):
     """VectorSearch with Postgres document storage."""
@@ -117,10 +123,10 @@ def configure_vector_store():
         project_id="gemini-med-lit-review",
         region="us-central1",
         index_id="1771018563230892032",
-        endpoint_id=<redact>,
-        pg_instance_connection_string=<redact>,
-        pg_user=<redact>,
-        pg_password=<redact>,
+        endpoint_id=os.environ.get("VECTOR_SEARCH_ENDPOINT_ID"),
+        pg_instance_connection_string=os.environ.get("PG_INSTANCE_CONNECTION_STRING"),
+        pg_user=os.environ.get("PG_USER"),
+        pg_password=os.environ.get("PG_PASSWORD"),
         pg_db="pubmed",
         pg_collection_name="articles",
         embedding=embeddings,
@@ -128,38 +134,54 @@ def configure_vector_store():
 
     return vector_store
 
-def configure_llm():
-    return ChatVertexAI(
-        model_name="gemini-1.5-pro-preview-0409",
-        convert_system_message_to_human=True,
-        safety_settings={
-            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-        }
+def generate_with_gemini(prompt: str) -> str:
+    """Generate content using the new Gemini SDK."""
+    generate_content_config = types.GenerateContentConfig(
+        temperature=0.7,
+        top_p=0.95,
+        max_output_tokens=8192,
+        safety_settings=[
+            types.SafetySetting(
+                category="HARM_CATEGORY_HATE_SPEECH",
+                threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_DANGEROUS_CONTENT",
+                threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_HARASSMENT",
+                threshold="OFF"
+            )
+        ],
     )
-
-def configure_qa_chain(retriever, llm, template_content):
-    prompt = ChatPromptTemplate.from_template(template_content)
-
-    setup_and_retrieval = RunnableParallel(
-        {"abstracts": retriever, "question": RunnablePassthrough()}
+    
+    contents = [
+        types.Content(
+            role="user",
+            parts=[types.Part(text=prompt)]
+        )
+    ]
+    
+    response = client.models.generate_content(
+        model=model,
+        contents=contents,
+        config=generate_content_config,
     )
-
-    return setup_and_retrieval | prompt | llm
+    
+    return response.text
 
 def generate_summary_for_retrieval(patient_record):
-    llm = configure_llm()
-    summary_prompt = ChatPromptTemplate.from_template(
+    prompt = (
         "Given the following patient record, create a concise summary of the patient's conditions and case. "
         "This summary will be used for retrieving relevant medical literature. Focus on key diagnoses, "
-        "treatments, and any unique aspects of the case.\n\nPatient Record: {record}"
+        f"treatments, and any unique aspects of the case.\n\nPatient Record: {patient_record}"
     )
-    summary_chain = summary_prompt | llm
-    response = summary_chain.invoke({"record": patient_record})
-    return response.content
+    return generate_with_gemini(prompt)
 
 def retrieve_documents(query):
     vector_store = configure_vector_store()
@@ -171,24 +193,23 @@ def retrieve_documents(query):
             for doc in docs]
 
 def generate_recommendations(patient_record, retrieved_docs):
-    llm = configure_llm()
-    recommendations_prompt = ChatPromptTemplate.from_template(
+    literature_text = "\n\n".join([f"Title: {doc['title']}\nAbstract: {doc['content']}\nPMID: {doc['pmid']}" for doc in retrieved_docs])
+    
+    prompt = (
         "You are a medical specialist reviewing a patient case and relevant medical literature. "
         "Based on the patient's record and the provided medical abstracts, generate treatment recommendations. "
         "Include a summary of the case, a table of recommendations based on actionable events, "
         "and emphasize any treatments that could target multiple actionable events.\n\n"
-        "Patient Record: {record}\n\n"
-        "Retrieved Medical Literature:\n{literature}\n\n"
+        f"Patient Record: {patient_record}\n\n"
+        f"Retrieved Medical Literature:\n{literature_text}\n\n"
         "Please provide your analysis and recommendations in the following format:\n"
         "1. Case Summary\n"
         "2. Recommendations Table (columns: Actionable Event, Suggested Treatment, PMID)\n"
         "3. Analysis and Discussion\n\n"
         "Be sure to include the PMID for each recommendation in the table."
     )
-    recommendations_chain = recommendations_prompt | llm
-    literature_text = "\n\n".join([f"Title: {doc['title']}\nAbstract: {doc['content']}\nPMID: {doc['pmid']}" for doc in retrieved_docs])
-    response = recommendations_chain.invoke({"record": patient_record, "literature": literature_text})
-    return response.content
+    
+    return generate_with_gemini(prompt)
 
 @functions_framework.http
 def generate_recommendations_http(request):

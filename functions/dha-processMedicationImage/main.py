@@ -1,8 +1,9 @@
 import base64
 import json
 import functions_framework
-import vertexai
-from vertexai.generative_models import GenerativeModel, Part, SafetySetting
+from google import genai
+from google.genai import types
+import os
 
 @functions_framework.http
 def process_medication_image(request):
@@ -35,30 +36,63 @@ def process_medication_image(request):
         image_data = image_file.read()
         print(f"Image data length: {len(image_data)} bytes")
 
-        # Initialize Vertex AI
-        print("Initializing Vertex AI")
-        vertexai.init(project="gemini-med-lit-review", location="us-central1")
-        model = GenerativeModel("gemini-1.5-flash-002")
+        # Initialize Gemini client
+        print("Initializing Gemini client")
+        client = genai.Client(
+            vertexai=True,
+            project="gemini-med-lit-review",
+            location="us-central1",
+        )
+        
+        model = "gemini-2.5-pro"
 
         # Prepare the image for the model
         print("Preparing image for model")
-        image_part = Part.from_data(mime_type=image_file.content_type, data=image_data)
+        image_part = types.Part.from_bytes(
+            data=image_data,
+            mime_type=image_file.content_type
+        )
 
         # Generate content
         print("Generating content")
-        response = model.generate_content(
-            [image_part, "Extract all relevant medication information from this image. Include names, dosages, total volumes, and any other pertinent details. Provide the information in a structured format."],
-            generation_config={
-                "max_output_tokens": 8192,
-                "temperature": 0.4,
-                "top_p": 0.95,
-            },
+        contents = [
+            types.Content(
+                role="user",
+                parts=[
+                    image_part,
+                    types.Part.from_text("Extract all relevant medication information from this image. Include names, dosages, total volumes, and any other pertinent details. Provide the information in a structured format.")
+                ]
+            )
+        ]
+        
+        generate_content_config = types.GenerateContentConfig(
+            temperature=0.4,
+            top_p=0.95,
+            max_output_tokens=8192,
             safety_settings=[
-                SafetySetting(category=SafetySetting.HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold=SafetySetting.HarmBlockThreshold.OFF),
-                SafetySetting(category=SafetySetting.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold=SafetySetting.HarmBlockThreshold.OFF),
-                SafetySetting(category=SafetySetting.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold=SafetySetting.HarmBlockThreshold.OFF),
-                SafetySetting(category=SafetySetting.HarmCategory.HARM_CATEGORY_HARASSMENT, threshold=SafetySetting.HarmBlockThreshold.OFF),
-            ]
+                types.SafetySetting(
+                    category="HARM_CATEGORY_HATE_SPEECH",
+                    threshold="OFF"
+                ),
+                types.SafetySetting(
+                    category="HARM_CATEGORY_DANGEROUS_CONTENT",
+                    threshold="OFF"
+                ),
+                types.SafetySetting(
+                    category="HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    threshold="OFF"
+                ),
+                types.SafetySetting(
+                    category="HARM_CATEGORY_HARASSMENT",
+                    threshold="OFF"
+                )
+            ],
+        )
+        
+        response = client.models.generate_content(
+            model=model,
+            contents=contents,
+            config=generate_content_config,
         )
 
         # Process the response

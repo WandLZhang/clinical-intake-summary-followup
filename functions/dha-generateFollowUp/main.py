@@ -1,45 +1,49 @@
-import vertexai
-from vertexai.generative_models import GenerativeModel, SafetySetting
+from google import genai
+from google.genai import types
 import functions_framework
 from flask import jsonify, request
 import json
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize Vertex AI
-vertexai.init(project="gemini-med-lit-review", location="us-central1")
+# Initialize Gemini client
+client = genai.Client(
+    vertexai=True,
+    project="gemini-med-lit-review",
+    location="us-central1",
+)
 
-generation_config = {
-    "max_output_tokens": 8192,
-    "temperature": 0.7,
-    "top_p": 0.95,
-}
+model = "gemini-2.5-pro"
 
-safety_settings = [
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-        threshold=SafetySetting.HarmBlockThreshold.OFF
-    ),
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-        threshold=SafetySetting.HarmBlockThreshold.OFF
-    ),
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-        threshold=SafetySetting.HarmBlockThreshold.OFF
-    ),
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_HARASSMENT,
-        threshold=SafetySetting.HarmBlockThreshold.OFF
-    ),
-]
+generate_content_config = types.GenerateContentConfig(
+    temperature=0.7,
+    top_p=0.95,
+    max_output_tokens=8192,
+    safety_settings=[
+        types.SafetySetting(
+            category="HARM_CATEGORY_HATE_SPEECH",
+            threshold="OFF"
+        ),
+        types.SafetySetting(
+            category="HARM_CATEGORY_DANGEROUS_CONTENT",
+            threshold="OFF"
+        ),
+        types.SafetySetting(
+            category="HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            threshold="OFF"
+        ),
+        types.SafetySetting(
+            category="HARM_CATEGORY_HARASSMENT",
+            threshold="OFF"
+        )
+    ],
+)
 
 def generate_follow_up_letter(patient_record, recommendations=None):
-    model = GenerativeModel("gemini-1.5-flash-002")
-    
     if not recommendations:
         rec_prompt = f"""
         Based on the following patient record, generate 3-5 medically sound recommendations:
@@ -47,10 +51,18 @@ def generate_follow_up_letter(patient_record, recommendations=None):
         
         Provide the recommendations in a list format.
         """
-        rec_response = model.generate_content(
-            [rec_prompt],
-            generation_config=generation_config,
-            safety_settings=safety_settings,
+        
+        rec_contents = [
+            types.Content(
+                role="user",
+                parts=[types.Part(text=rec_prompt)]
+            )
+        ]
+        
+        rec_response = client.models.generate_content(
+            model=model,
+            contents=rec_contents,
+            config=generate_content_config,
         )
         recommendations = rec_response.text
 
@@ -80,16 +92,20 @@ def generate_follow_up_letter(patient_record, recommendations=None):
     - Wrap the entire content in a <div> with class "follow-up-letter"
     """
 
-    responses = model.generate_content(
-        [prompt],
-        generation_config=generation_config,
-        safety_settings=safety_settings,
-        stream=True,
-    )
+    contents = [
+        types.Content(
+            role="user",
+            parts=[types.Part(text=prompt)]
+        )
+    ]
 
     generated_letter = ""
-    for response in responses:
-        generated_letter += response.text
+    for chunk in client.models.generate_content_stream(
+        model=model,
+        contents=contents,
+        config=generate_content_config,
+    ):
+        generated_letter += chunk.text
 
     return generated_letter
 
